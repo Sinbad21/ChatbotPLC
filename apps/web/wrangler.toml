@@ -1,0 +1,16 @@
+# Cloudflare Workers configuration for OpenNext
+name = "chatbotstudio-web"
+main = ".open-next/worker.js"
+compatibility_date = "2025-05-05"
+compatibility_flags = ["nodejs_compat"]
+
+# Workers Paid plan: 10 MiB limit (compressed)
+# Static assets served from assets directory
+
+# Environment variables
+[vars]
+NEXT_PUBLIC_API_URL = "https://chatbotstudio.gabrypiritore.workers.dev"
+
+[assets]
+directory = ".open-next/assets"
+binding = "ASSETS"

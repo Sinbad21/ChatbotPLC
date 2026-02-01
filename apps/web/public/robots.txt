@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://chatbot-5o5.pages.dev/sitemap.xml

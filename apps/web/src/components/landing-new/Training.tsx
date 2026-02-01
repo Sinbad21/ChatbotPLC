@@ -1,0 +1,119 @@
+'use client';
+
+import React from 'react';
+import { motion } from 'framer-motion';
+import { FileText, Layers, Database, Sliders, Zap, Shield, History, Puzzle } from 'lucide-react';
+
+const steps = [
+  {
+    id: "01",
+    title: "Prompt Principale",
+    desc: "Definisce ruolo, tono, limiti e stile. È la 'personalità' fissa e immutabile del bot.",
+    icon: <FileText />
+  },
+  {
+    id: "02",
+    title: "Prompt Dinamici",
+    desc: "Specializzazione su richiesta. Aggiunti dall'utente per compiti specifici come vendite o supporto.",
+    icon: <Layers />
+  },
+  {
+    id: "03",
+    title: "Knowledge Base (RAG)",
+    desc: "Indicizzazione vettoriale. Recupera documenti pertinenti in tempo reale per risposte basate sui tuoi dati.",
+    icon: <Database />
+  },
+  {
+    id: "04",
+    title: "Parametri Neurali",
+    desc: "Configurazione di Temperature e Max Tokens. Bilanciano creatività e precisione chirurgica.",
+    icon: <Sliders />
+  },
+  {
+    id: "05",
+    title: "Tool Calling / API",
+    desc: "Azione pura. Il bot esegue funzioni esterne su CRM, siti web e sistemi di automazione.",
+    icon: <Zap />
+  },
+  {
+    id: "06",
+    title: "Regole & Restrizioni",
+    desc: "Sicurezza blindata. Filtri etici e contesto aziendale per proteggere l'integrità del brand.",
+    icon: <Shield />
+  },
+  {
+    id: "07",
+    title: "Memoria Storica",
+    desc: "Continuità di sessione. Il bot utilizza il contesto precedente per conversazioni fluide.",
+    icon: <History />
+  },
+  {
+    id: "08",
+    title: "Moduli Opzionali",
+    desc: "Espansione funzionale. Plugin per calendari, prenotazioni, scraping e lead collection.",
+    icon: <Puzzle />
+  }
+];
+
+export const Training: React.FC = () => {
+  return (
+    <section className="py-24 bg-platinum-950 relative overflow-hidden border-t border-platinum-900">
+      <div className="absolute inset-0 opacity-[0.05] pointer-events-none">
+        <div className="absolute top-0 left-1/4 w-[1px] h-full bg-gradient-to-b from-transparent via-platinum-400 to-transparent" />
+        <div className="absolute top-0 right-1/4 w-[1px] h-full bg-gradient-to-b from-transparent via-platinum-400 to-transparent" />
+        <div className="absolute top-1/2 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-platinum-400 to-transparent" />
+      </div>
+
+      <div className="container mx-auto px-4 sm:px-6 relative z-10">
+        <div className="text-center mb-20">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="font-serif text-4xl md:text-5xl text-white mb-6"
+          >
+            Architettura di <span className="text-platinum-400 italic">Apprendimento</span>
+          </motion.h2>
+          <p className="text-platinum-500 max-w-2xl mx-auto">
+            Il protocollo neurale in 8 step. Ecco come trasformiamo un modello grezzo in un esperto del tuo settore.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {steps.map((step, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1, duration: 0.5 }}
+              className="group relative p-6 bg-platinum-900/30 backdrop-blur-sm border border-platinum-800 rounded-xl hover:bg-platinum-900/60 transition-all duration-500 hover:border-platinum-500 overflow-hidden"
+            >
+              <div className="absolute -right-4 -bottom-8 text-9xl font-serif font-bold text-platinum-800/20 group-hover:text-platinum-700/30 transition-colors select-none z-0">
+                {step.id}
+              </div>
+
+              <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+
+              <div className="relative z-10">
+                <div className="w-12 h-12 rounded-lg bg-platinum-950 border border-platinum-700 flex items-center justify-center text-platinum-200 mb-6 shadow-lg group-hover:text-white group-hover:shadow-[0_0_15px_rgba(255,255,255,0.2)] transition-all">
+                  {step.icon}
+                </div>
+
+                <h3 className="text-lg font-serif font-bold text-platinum-100 mb-3 group-hover:text-white transition-colors">
+                  {step.title}
+                </h3>
+
+                <p className="text-sm text-platinum-500 leading-relaxed group-hover:text-platinum-300 transition-colors">
+                  {step.desc}
+                </p>
+              </div>
+
+              <div className="absolute bottom-0 left-0 w-0 h-[2px] bg-platinum-200 group-hover:w-full transition-all duration-700 ease-out" />
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};

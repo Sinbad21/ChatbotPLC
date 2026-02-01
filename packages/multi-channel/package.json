@@ -1,0 +1,14 @@
+{
+  "name": "@chatbot-studio/multi-channel",
+  "version": "1.0.0",
+  "description": "Multi-channel messaging adapters for WhatsApp, Telegram, Slack, Discord",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "scripts": {
+    "dev": "tsc --watch",
+    "build": "tsc"
+  },
+  "keywords": ["whatsapp", "telegram", "slack", "discord", "multi-channel"],
+  "author": "",
+  "license": "MIT"
+}

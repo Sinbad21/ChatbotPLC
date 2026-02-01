@@ -1,0 +1,32 @@
+﻿name = "chatbotstudio"
+main = "src/index.ts"
+compatibility_date = "2024-09-23"
+compatibility_flags = ["nodejs_compat"]
+
+# Environment variables (secrets configured in Cloudflare dashboard)
+[vars]
+APP_URL = "https://app.omnicalstudio.io"
+
+# Secrets must be set in Cloudflare dashboard under Settings → Variables and Secrets
+# Required:
+# - DATABASE_URL
+# - JWT_SECRET
+# - JWT_REFRESH_SECRET
+# - OPENAI_API_KEY
+#
+# Optional (for Review Bot):
+# - STRIPE_WEBHOOK_SECRET
+#
+# Optional (for messaging channels):
+# - WHATSAPP_API_KEY
+# - WHATSAPP_PHONE_NUMBER_ID
+# - WHATSAPP_WEBHOOK_TOKEN
+# - TELEGRAM_BOT_TOKEN
+# - TELEGRAM_WEBHOOK_SECRET
+# - SLACK_BOT_TOKEN
+# - SLACK_SIGNING_SECRET
+# - SLACK_APP_ID
+#
+# Optional (for Calendar):
+# - GOOGLE_CLIENT_ID
+# - GOOGLE_CLIENT_SECRET

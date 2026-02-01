@@ -1,0 +1,7 @@
+# Cloudflare Pages - Ignore large cache files
+.next/cache
+cache
+node_modules
+.git
+.env*
+*.log

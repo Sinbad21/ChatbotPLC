@@ -1,0 +1,61 @@
+name: Deploy Next.js to Cloudflare Workers
+
+# Deploys to: https://chatbotstudio-web.gabrypiritore.workers.dev
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'apps/web/**'
+      - 'packages/**'
+      - '.github/workflows/deploy-worker.yml'
+
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: 'Why are you forcing a deploy?'
+        required: false
+        default: 'manual redeploy'
+        type: string
+
+env:
+  NODE_VERSION: 20
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    name: Deploy to Cloudflare Workers
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '${{ env.NODE_VERSION }}'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install --legacy-peer-deps
+
+      - name: Build web (Next + OpenNext)
+        run: npm -w apps/web run build
+
+      - name: Verify OpenNext output
+        run: |
+          echo "Listing apps/web/.open-next (debug)"
+          ls -la apps/web/.open-next || true
+          echo "Listing apps/web/.open-next/assets (debug)"
+          ls -la apps/web/.open-next/assets || true
+          test -f apps/web/.open-next/worker.js
+
+      - name: Deploy to Cloudflare Workers
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: '${{ secrets.CLOUDFLARE_API_TOKEN }}'
+          accountId: '${{ secrets.CLOUDFLARE_ACCOUNT_ID }}'
+          workingDirectory: apps/web
+          wranglerVersion: '4.47.0'
+          command: deploy --force --log-level debug

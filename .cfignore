@@ -1,0 +1,21 @@
+# Cloudflare Pages ignore file
+# Exclude files that shouldn't be deployed
+
+# Next.js cache (can be huge and not needed for deployment)
+.next/cache/
+**/cache/webpack/
+cache/
+
+# Node modules (dependencies are installed during build)
+node_modules/
+
+# Build artifacts not needed
+.turbo/
+*.log
+.DS_Store
+
+# Development files
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local

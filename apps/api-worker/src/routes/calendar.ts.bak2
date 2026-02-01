@@ -1,0 +1,1109 @@
+/**
+ * Calendar API Endpoints
+ * Handles OAuth flow, availability checking, event management
+ */
+
+import { Hono } from 'hono';
+import { GoogleCalendarService } from '../services/calendar/google-calendar';
+import { getPrisma } from '../db';
+import { z } from 'zod';
+import { sendAttendeeConfirmation, sendOwnerNotification } from '../services/email-service';
+import { rateLimitBooking } from '../middleware/rate-limit';
+
+type Bindings = {
+  DATABASE_URL: string;
+  GOOGLE_CLIENT_ID: string;
+  GOOGLE_CLIENT_SECRET: string;
+  GOOGLE_REDIRECT_URI: string;
+};
+
+// Validation schemas
+const connectSchema = z.object({
+  organizationId: z.string(),
+  botId: z.string().optional(),
+});
+
+const availabilitySchema = z.object({
+  connectionId: z.string(),
+  startDate: z.string().datetime(),
+  endDate: z.string().datetime(),
+});
+
+const createEventSchema = z.object({
+  connectionId: z.string(),
+  conversationId: z.string().optional(),
+  summary: z.string().min(1).max(255),
+  description: z.string().max(2000).optional(),
+  startTime: z.string().datetime(),
+  endTime: z.string().datetime(),
+  timeZone: z.string().default('Europe/Rome'),
+  attendeeEmail: z.string().email().optional(),
+  attendeeName: z.string().max(255).optional(),
+  attendeeFirstName: z.string().max(100).optional(),
+  attendeeLastName: z.string().max(100).optional(),
+  attendeePhone: z.string().max(50).optional(),
+  organizerEmail: z.string().email(),
+  idempotencyKey: z.string().optional(),
+});
+
+const updateEventSchema = z.object({
+  summary: z.string().min(1).max(255).optional(),
+  description: z.string().max(2000).optional(),
+  startTime: z.string().datetime().optional(),
+  endTime: z.string().datetime().optional(),
+  timeZone: z.string().optional(),
+});
+
+// Initialize Google Calendar service
+const getCalendarService = (c: any): GoogleCalendarService => {
+  const clientId = c.env.GOOGLE_CLIENT_ID;
+  const clientSecret = c.env.GOOGLE_CLIENT_SECRET;
+  const redirectUri = c.env.GOOGLE_REDIRECT_URI || 'https://yourdomain.com/api/calendar/callback/google';
+
+  if (!clientId || !clientSecret) {
+    throw new Error('Google Calendar credentials not configured');
+  }
+
+  return new GoogleCalendarService({
+    clientId,
+    clientSecret,
+    redirectUri,
+    env: c.env,
+  });
+};
+
+// Register all calendar routes
+function registerRoutes(app: Hono<{ Bindings: Bindings }>) {
+  /**
+   * GET /calendar/connect/google
+   * Start OAuth flow for Google Calendar
+   */
+  app.get('/connect/google', async (c) => {
+    const prisma = getPrisma(c.env);
+    const prisma = getPrisma(c.env);
+    try {
+      const { organizationId } = connectSchema.parse({
+        organizationId: c.req.query('organizationId'),
+      });
+
+      // Verify organization exists and user has access
+      const organization = await prisma.organization.findUnique({
+      where: { id: organizationId },
+      include: { subscription: true },
+    });
+
+    if (!organization) {
+      return c.json({ error: 'Organization not found' }, 404);
+    }
+
+    // Check plan: Calendar is for Advanced/Custom plans only
+    const allowedPlans = ['advanced', 'custom', 'enterprise'];
+    if (!allowedPlans.includes(organization.subscription?.plan?.toLowerCase() || '')) {
+      return c.json(
+        {
+          error: 'Calendar integration requires Advanced or Custom plan',
+          upgrade: true,
+        },
+        403
+      );
+    }
+
+    // Generate state token for OAuth
+    const state = crypto.randomUUID();
+
+    // Store state in database for verification
+    // In production, use Redis or session store
+    await prisma.organization.update({
+      where: { id: organizationId },
+      data: {
+        metadata: {
+          ...((organization.metadata as any) || {}),
+          calendarOAuthState: state,
+          calendarOAuthTimestamp: new Date().toISOString(),
+        },
+      },
+    });
+
+    const calendarService = getCalendarService(c);
+    const authUrl = calendarService.getAuthorizationUrl(state, organizationId);
+
+    return c.json({ authUrl });
+  } catch (error) {
+    console.error('Calendar connect error:', error);
+    return c.json(
+      {
+        error: error instanceof Error ? error.message : 'Failed to initiate OAuth',
+      },
+      500
+    );
+  }
+});
+
+/**
+ * GET /calendar/callback/google
+ * OAuth callback handler
+ */
+app.get('/callback/google', async (c) => {
+    const prisma = getPrisma(c.env);
+  const prisma = getPrisma(c.env);
+  try {
+    const code = c.req.query('code');
+    const state = c.req.query('state');
+    const error = c.req.query('error');
+
+    if (error) {
+      return c.redirect(`/dashboard/integrations?calendar_error=${error}`);
+    }
+
+    if (!code || !state) {
+      return c.json({ error: 'Missing code or state' }, 400);
+    }
+
+    // Parse state: format is "uuid:organizationId"
+    const [stateToken, organizationId] = state.split(':');
+
+    if (!organizationId) {
+      return c.json({ error: 'Invalid state format' }, 400);
+    }
+
+    // Verify state
+    const organization = await prisma.organization.findUnique({
+      where: { id: organizationId },
+    });
+
+    if (!organization) {
+      return c.json({ error: 'Organization not found' }, 404);
+    }
+
+    const storedState = (organization.metadata as any)?.calendarOAuthState;
+    if (storedState !== stateToken) {
+      return c.json({ error: 'Invalid state token' }, 400);
+    }
+
+    // Exchange code for tokens
+    const calendarService = getCalendarService(c);
+    const tokens = await calendarService.exchangeCodeForTokens(code);
+
+    // Get calendar list to let user choose
+    const calendars = await calendarService.listCalendars(tokens.accessToken);
+    const primaryCalendar = calendars.find((cal: any) => cal.primary) || calendars[0];
+
+    if (!primaryCalendar) {
+      return c.json({ error: 'No calendar found' }, 400);
+    }
+
+    // Create calendar connection
+    const connection = await prisma.calendarConnection.create({
+      data: {
+        organizationId,
+        provider: 'GOOGLE',
+        accessToken: tokens.accessToken,
+        refreshToken: tokens.refreshToken,
+        tokenExpiresAt: tokens.expiresAt,
+        calendarId: primaryCalendar.id,
+        calendarName: primaryCalendar.summary,
+        timeZone: primaryCalendar.timeZone || 'Europe/Rome',
+        isActive: true,
+      },
+    });
+
+    // Clear OAuth state
+    await prisma.organization.update({
+      where: { id: organizationId },
+      data: {
+        metadata: {
+          ...((organization.metadata as any) || {}),
+          calendarOAuthState: null,
+          calendarOAuthTimestamp: null,
+        },
+      },
+    });
+
+    // Redirect to success page
+    return c.redirect(`/dashboard/calendar?connection_id=${connection.id}&success=true`);
+  } catch (error) {
+    console.error('Calendar callback error:', error);
+    return c.redirect('/dashboard/integrations?calendar_error=callback_failed');
+  }
+});
+
+/**
+ * GET /calendar/connections
+ * List calendar connections for an organization
+ */
+app.get('/connections', async (c) => {
+    const prisma = getPrisma(c.env);
+  try {
+    const organizationId = c.req.query('organizationId');
+
+    if (!organizationId) {
+      return c.json({ error: 'organizationId required' }, 400);
+    }
+
+    const connections = await prisma.calendarConnection.findMany({
+      where: { organizationId },
+      include: {
+        _count: {
+          select: { events: true },
+        },
+      },
+      orderBy: { createdAt: 'desc' },
+    });
+
+    return c.json({ connections });
+  } catch (error) {
+    console.error('List connections error:', error);
+    return c.json({ error: 'Failed to list connections' }, 500);
+  }
+});
+
+/**
+ * GET /calendar/connections/:id
+ * Get a specific calendar connection
+ */
+app.get('/connections/:id', async (c) => {
+    const prisma = getPrisma(c.env);
+  try {
+    const connectionId = c.req.param('id');
+
+    const connection = await prisma.calendarConnection.findUnique({
+      where: { id: connectionId },
+      include: {
+        _count: {
+          select: { events: true },
+        },
+      },
+    });
+
+    if (!connection) {
+      return c.json({ error: 'Connection not found' }, 404);
+    }
+
+    // Don't expose tokens
+    const { accessToken, refreshToken, ...safeConnection } = connection;
+
+    return c.json({ connection: safeConnection });
+  } catch (error) {
+    console.error('Get connection error:', error);
+    return c.json({ error: 'Failed to get connection' }, 500);
+  }
+});
+
+/**
+ * PATCH /calendar/connections/:id
+ * Update calendar connection settings
+ */
+app.patch('/connections/:id', async (c) => {
+    const prisma = getPrisma(c.env);
+  try {
+    const connectionId = c.req.param('id');
+    const body = await c.req.json();
+
+    const {
+      botId,
+      slotDuration,
+      bufferTime,
+      maxDailyBookings,
+      workingHours,
+      blockedDates,
+      widgetTitle,
+      widgetSubtitle,
+      confirmMessage,
+      ownerEmail,
+      notifyOwner,
+      isActive,
+    } = body;
+
+    const connection = await prisma.calendarConnection.update({
+      where: { id: connectionId },
+      data: {
+        botId,
+        slotDuration,
+        bufferTime,
+        maxDailyBookings,
+        workingHours,
+        blockedDates,
+        widgetTitle,
+        widgetSubtitle,
+        confirmMessage,
+        ownerEmail,
+        notifyOwner,
+        isActive,
+      },
+    });
+
+    return c.json({ connection });
+  } catch (error) {
+    console.error('Update connection error:', error);
+    return c.json({ error: 'Failed to update connection' }, 500);
+  }
+});
+
+/**
+ * DELETE /calendar/connections/:id
+ * Delete a calendar connection
+ */
+app.delete('/connections/:id', async (c) => {
+    const prisma = getPrisma(c.env);
+  try {
+    const connectionId = c.req.param('id');
+
+    await prisma.calendarConnection.delete({
+      where: { id: connectionId },
+    });
+
+    return c.json({ success: true });
+  } catch (error) {
+    console.error('Delete connection error:', error);
+    return c.json({ error: 'Failed to delete connection' }, 500);
+  }
+});
+
+/**
+ * POST /calendar/availability
+ * Get available time slots
+ */
+app.post('/availability', async (c) => {
+    const prisma = getPrisma(c.env);
+  try {
+    const body = availabilitySchema.parse(await c.req.json());
+
+    const startDate = new Date(body.startDate);
+    const endDate = new Date(body.endDate);
+
+    // Validate date range
+    const maxDays = 90;
+    const daysDiff = (endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24);
+
+    if (daysDiff > maxDays) {
+      return c.json({ error: `Date range cannot exceed ${maxDays} days` }, 400);
+    }
+
+    if (startDate >= endDate) {
+      return c.json({ error: 'startDate must be before endDate' }, 400);
+    }
+
+    const calendarService = getCalendarService(c);
+    const slots = await calendarService.getAvailableSlots(
+      body.connectionId,
+      startDate,
+      endDate
+    );
+
+    return c.json({ slots });
+  } catch (error) {
+    console.error('Availability error:', error);
+    return c.json(
+      {
+        error: error instanceof Error ? error.message : 'Failed to get availability',
+      },
+      500
+    );
+  }
+});
+
+/**
+ * POST /calendar/events
+ * Create a calendar event
+ * Rate limited: 5 bookings per hour per IP
+ */
+app.post('/events', rateLimitBooking({ maxAttempts: 5, windowMs: 60 * 60 * 1000 }), async (c) => {
+    const prisma = getPrisma(c.env);
+  try {
+    const body = createEventSchema.parse(await c.req.json());
+
+    // Validate times
+    const start = new Date(body.startTime);
+    const end = new Date(body.endTime);
+
+    if (start >= end) {
+      return c.json({ error: 'startTime must be before endTime' }, 400);
+    }
+
+    // Use transaction with row-level locking to prevent double bookings
+    const result = await prisma.$transaction(async (tx) => {
+      // 1. Get connection with lock
+      const connection = await tx.calendarConnection.findUnique({
+        where: { id: body.connectionId },
+        include: {
+          events: {
+            where: {
+              startTime: {
+                gte: new Date(start.toDateString()),
+                lt: new Date(new Date(start.toDateString()).getTime() + 24 * 60 * 60 * 1000),
+              },
+              status: { not: 'CANCELLED' },
+            },
+          },
+        },
+      });
+
+      if (!connection) {
+        throw new Error('Calendar connection not found');
+      }
+
+      // 2. Check daily booking limit
+      if (connection.events.length >= connection.maxDailyBookings) {
+        throw new Error('Daily booking limit reached');
+      }
+
+      // 3. Check for overlapping bookings (CRITICAL - prevents double booking)
+      const overlappingEvent = await tx.calendarEvent.findFirst({
+        where: {
+          calendarConnectionId: body.connectionId,
+          status: { not: 'CANCELLED' },
+          OR: [
+            // New event starts during existing event
+            {
+              AND: [
+                { startTime: { lte: start } },
+                { endTime: { gt: start } },
+              ],
+            },
+            // New event ends during existing event
+            {
+              AND: [
+                { startTime: { lt: end } },
+                { endTime: { gte: end } },
+              ],
+            },
+            // New event completely contains existing event
+            {
+              AND: [
+                { startTime: { gte: start } },
+                { endTime: { lte: end } },
+              ],
+            },
+          ],
+        },
+      });
+
+      if (overlappingEvent) {
+        throw new Error('This time slot is already booked');
+      }
+
+      // 4. Check for duplicate using idempotency key
+      if (body.idempotencyKey) {
+        const existingEvent = await tx.calendarEvent.findUnique({
+          where: { idempotencyKey: body.idempotencyKey },
+        });
+
+        if (existingEvent) {
+          return existingEvent; // Return existing event instead of creating duplicate
+        }
+      }
+
+      // 5. All checks passed - create the event
+      const calendarService = getCalendarService(c);
+      const event = await calendarService.createEvent(body.connectionId, {
+        calendarId: connection.calendarId,
+        summary: body.summary,
+        description: body.description,
+        start: body.startTime,
+        end: body.endTime,
+        timeZone: body.timeZone,
+        attendeeEmail: body.attendeeEmail,
+        attendeeName: body.attendeeName,
+        organizerEmail: body.organizerEmail,
+        idempotencyKey: body.idempotencyKey,
+      });
+
+      return event;
+    });
+
+    const event = result;
+
+    // Send email notifications asynchronously (don't wait for completion)
+    const connection = await prisma.calendarConnection.findUnique({
+      where: { id: body.connectionId },
+      select: {
+        ownerEmail: true,
+        notifyOwner: true,
+        calendarName: true,
+      },
+    });
+
+    // Send confirmation email to attendee
+    sendAttendeeConfirmation({
+      attendeeEmail: body.attendeeEmail,
+      attendeeName: body.attendeeName,
+      attendeeFirstName: body.attendeeFirstName,
+      attendeeLastName: body.attendeeLastName,
+      attendeePhone: body.attendeePhone,
+      startTime: body.startTime,
+      endTime: body.endTime,
+      timeZone: body.timeZone,
+      notes: body.description,
+      calendarName: connection?.calendarName,
+    }).catch(err => console.error('Failed to send attendee confirmation:', err));
+
+    // Send notification email to owner if enabled
+    if (connection?.notifyOwner && connection?.ownerEmail) {
+      sendOwnerNotification({
+        ownerEmail: connection.ownerEmail,
+        attendeeEmail: body.attendeeEmail,
+        attendeeName: body.attendeeName,
+        attendeeFirstName: body.attendeeFirstName,
+        attendeeLastName: body.attendeeLastName,
+        attendeePhone: body.attendeePhone,
+        startTime: body.startTime,
+        endTime: body.endTime,
+        timeZone: body.timeZone,
+        notes: body.description,
+        calendarName: connection.calendarName,
+      }).catch(err => console.error('Failed to send owner notification:', err));
+    }
+
+    return c.json({ event }, 201);
+  } catch (error) {
+    console.error('Create event error:', error);
+
+    // Handle specific error cases with appropriate status codes
+    if (error instanceof Error) {
+      if (error.message === 'Calendar connection not found') {
+        return c.json({ error: error.message }, 404);
+      }
+      if (error.message === 'Daily booking limit reached') {
+        return c.json({ error: error.message }, 429);
+      }
+      if (error.message === 'This time slot is already booked') {
+        return c.json({ error: error.message }, 409); // Conflict
+      }
+      return c.json({ error: error.message }, 500);
+    }
+
+    return c.json({ error: 'Failed to create event' }, 500);
+  }
+});
+
+/**
+ * GET /calendar/events/:id
+ * Get a specific event
+ */
+app.get('/events/:id', async (c) => {
+    const prisma = getPrisma(c.env);
+  try {
+    const eventId = c.req.param('id');
+
+    const event = await prisma.calendarEvent.findUnique({
+      where: { id: eventId },
+      include: {
+        connection: {
+          select: {
+            calendarName: true,
+            timeZone: true,
+          },
+        },
+      },
+    });
+
+    if (!event) {
+      return c.json({ error: 'Event not found' }, 404);
+    }
+
+    return c.json({ event });
+  } catch (error) {
+    console.error('Get event error:', error);
+    return c.json({ error: 'Failed to get event' }, 500);
+  }
+});
+
+/**
+ * PATCH /calendar/events/:id
+ * Update an event (reschedule)
+ */
+app.patch('/events/:id', async (c) => {
+    const prisma = getPrisma(c.env);
+  try {
+    const eventId = c.req.param('id');
+    const body = updateEventSchema.parse(await c.req.json());
+
+    const event = await prisma.calendarEvent.findUnique({
+      where: { id: eventId },
+    });
+
+    if (!event) {
+      return c.json({ error: 'Event not found' }, 404);
+    }
+
+    if (event.status === 'CANCELLED') {
+      return c.json({ error: 'Cannot update cancelled event' }, 400);
+    }
+
+    const calendarService = getCalendarService(c);
+    const updatedEvent = await calendarService.updateEvent(
+      event.calendarConnectionId,
+      eventId,
+      {
+        summary: body.summary,
+        description: body.description,
+        start: body.startTime,
+        end: body.endTime,
+        timeZone: body.timeZone,
+      }
+    );
+
+    // Update status to RESCHEDULED if time changed
+    if (body.startTime || body.endTime) {
+      await prisma.calendarEvent.update({
+        where: { id: eventId },
+        data: { status: 'RESCHEDULED' },
+      });
+    }
+
+    return c.json({ event: updatedEvent });
+  } catch (error) {
+    console.error('Update event error:', error);
+    return c.json({ error: 'Failed to update event' }, 500);
+  }
+});
+
+/**
+ * DELETE /calendar/events/:id
+ * Cancel an event
+ */
+app.delete('/events/:id', async (c) => {
+    const prisma = getPrisma(c.env);
+  try {
+    const eventId = c.req.param('id');
+
+    const event = await prisma.calendarEvent.findUnique({
+      where: { id: eventId },
+    });
+
+    if (!event) {
+      return c.json({ error: 'Event not found' }, 404);
+    }
+
+    const calendarService = getCalendarService(c);
+    await calendarService.cancelEvent(event.calendarConnectionId, eventId);
+
+    return c.json({ success: true });
+  } catch (error) {
+    console.error('Cancel event error:', error);
+    return c.json({ error: 'Failed to cancel event' }, 500);
+  }
+});
+
+/**
+ * GET /calendar/events
+ * List events for a connection or conversation
+ */
+app.get('/events', async (c) => {
+    const prisma = getPrisma(c.env);
+  try {
+    const connectionId = c.req.query('connectionId');
+    const conversationId = c.req.query('conversationId');
+    const status = c.req.query('status');
+
+    const where: any = {};
+
+    if (connectionId) where.calendarConnectionId = connectionId;
+    if (conversationId) where.conversationId = conversationId;
+    if (status) where.status = status;
+
+    const events = await prisma.calendarEvent.findMany({
+      where,
+      include: {
+        connection: {
+          select: {
+            calendarName: true,
+            timeZone: true,
+          },
+        },
+      },
+      orderBy: { startTime: 'asc' },
+    });
+
+    return c.json({ events });
+  } catch (error) {
+    console.error('List events error:', error);
+    return c.json({ error: 'Failed to list events' }, 500);
+  }
+});
+
+/**
+ * POST /calendar/webhook
+ * Handle Google Calendar push notifications
+ */
+app.post('/webhook', async (c) => {
+    const prisma = getPrisma(c.env);
+  try {
+    const channelId = c.req.header('X-Goog-Channel-ID');
+    const resourceState = c.req.header('X-Goog-Resource-State');
+    const resourceId = c.req.header('X-Goog-Resource-ID');
+
+    console.log('Calendar webhook received:', {
+      channelId,
+      resourceState,
+      resourceId,
+    });
+
+    // Handle different resource states
+    switch (resourceState) {
+      case 'sync':
+        // Initial sync notification
+        return c.json({ success: true });
+
+      case 'exists':
+        // Event created or updated
+        // In production, fetch the event details and sync with database
+        break;
+
+      case 'not_exists':
+        // Event deleted
+        // In production, mark event as cancelled in database
+        break;
+    }
+
+    return c.json({ success: true });
+  } catch (error) {
+    console.error('Calendar webhook error:', error);
+    return c.json({ error: 'Webhook processing failed' }, 500);
+  }
+});
+
+/**
+ * PUBLIC WIDGET ENDPOINTS
+ * These endpoints are accessible without authentication using widgetId
+ * Used by standalone booking customers and embedded widgets
+ */
+
+/**
+ * GET /calendar/widget/:widgetId/config
+ * Get widget configuration (public endpoint)
+ */
+app.get('/widget/:widgetId/config', async (c) => {
+    const prisma = getPrisma(c.env);
+  try {
+    const widgetId = c.req.param('widgetId');
+
+    const connection = await prisma.calendarConnection.findUnique({
+      where: { widgetId },
+      select: {
+        id: true,
+        widgetTitle: true,
+        widgetSubtitle: true,
+        widgetPrimaryColor: true,
+        widgetFontFamily: true,
+        confirmationMessage: true,
+        slotDuration: true,
+        isActive: true,
+        calendarName: true,
+      },
+    });
+
+    if (!connection) {
+      return c.json({ error: 'Widget not found' }, 404);
+    }
+
+    if (!connection.isActive) {
+      return c.json({ error: 'Widget is not active' }, 403);
+    }
+
+    return c.json({ config: connection });
+  } catch (error) {
+    console.error('Widget config error:', error);
+    return c.json({ error: 'Failed to get widget config' }, 500);
+  }
+});
+
+/**
+ * POST /calendar/widget/:widgetId/availability
+ * Get available time slots for widget (public endpoint)
+ */
+app.post('/widget/:widgetId/availability', async (c) => {
+    const prisma = getPrisma(c.env);
+  try {
+    const widgetId = c.req.param('widgetId');
+    const body = await c.req.json();
+
+    const { startDate, endDate } = z.object({
+      startDate: z.string().datetime(),
+      endDate: z.string().datetime(),
+    }).parse(body);
+
+    // Get connection by widgetId
+    const connection = await prisma.calendarConnection.findUnique({
+      where: { widgetId },
+      select: { id: true, isActive: true },
+    });
+
+    if (!connection) {
+      return c.json({ error: 'Widget not found' }, 404);
+    }
+
+    if (!connection.isActive) {
+      return c.json({ error: 'Widget is not active' }, 403);
+    }
+
+    const start = new Date(startDate);
+    const end = new Date(endDate);
+
+    // Validate date range
+    const maxDays = 90;
+    const daysDiff = (end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24);
+
+    if (daysDiff > maxDays) {
+      return c.json({ error: `Date range cannot exceed ${maxDays} days` }, 400);
+    }
+
+    if (start >= end) {
+      return c.json({ error: 'startDate must be before endDate' }, 400);
+    }
+
+    const calendarService = getCalendarService(c);
+    const slots = await calendarService.getAvailableSlots(
+      connection.id,
+      start,
+      end
+    );
+
+    return c.json({ slots });
+  } catch (error) {
+    console.error('Widget availability error:', error);
+    return c.json(
+      {
+        error: error instanceof Error ? error.message : 'Failed to get availability',
+      },
+      500
+    );
+  }
+});
+
+/**
+ * POST /calendar/widget/:widgetId/events
+ * Create a booking via widget (public endpoint with rate limiting)
+ * Rate limited: 5 bookings per hour per IP
+ */
+app.post('/widget/:widgetId/events', rateLimitBooking({ maxAttempts: 5, windowMs: 60 * 60 * 1000 }), async (c) => {
+    const prisma = getPrisma(c.env);
+  try {
+    const widgetId = c.req.param('widgetId');
+    const body = await c.req.json();
+
+    const eventData = z.object({
+      summary: z.string().min(1).max(255),
+      description: z.string().max(2000).optional(),
+      startTime: z.string().datetime(),
+      endTime: z.string().datetime(),
+      timeZone: z.string().default('Europe/Rome'),
+      attendeeEmail: z.string().email(),
+      attendeeName: z.string().max(255).optional(),
+      attendeeFirstName: z.string().max(100),
+      attendeeLastName: z.string().max(100),
+      attendeePhone: z.string().max(50),
+      notes: z.string().max(2000).optional(),
+    }).parse(body);
+
+    // Get connection by widgetId
+    const connection = await prisma.calendarConnection.findUnique({
+      where: { widgetId },
+      select: {
+        id: true,
+        isActive: true,
+        notificationEmail: true,
+        sendOwnerNotifications: true,
+        sendCustomerNotifications: true,
+        calendarName: true,
+        organizationId: true,
+        standaloneAccountEmail: true,
+      },
+    });
+
+    if (!connection) {
+      return c.json({ error: 'Widget not found' }, 404);
+    }
+
+    if (!connection.isActive) {
+      return c.json({ error: 'Bookings are not available at this time' }, 403);
+    }
+
+    // Validate times
+    const start = new Date(eventData.startTime);
+    const end = new Date(eventData.endTime);
+
+    if (start >= end) {
+      return c.json({ error: 'startTime must be before endTime' }, 400);
+    }
+
+    // Use transaction with row-level locking to prevent double bookings
+    const result = await prisma.$transaction(async (tx) => {
+      // 1. Get connection with lock
+      const conn = await tx.calendarConnection.findUnique({
+        where: { id: connection.id },
+        include: {
+          events: {
+            where: {
+              startTime: {
+                gte: new Date(start.toDateString()),
+                lt: new Date(new Date(start.toDateString()).getTime() + 24 * 60 * 60 * 1000),
+              },
+              status: { not: 'CANCELLED' },
+            },
+          },
+        },
+      });
+
+      if (!conn) {
+        throw new Error('Calendar connection not found');
+      }
+
+      // 2. Check daily booking limit
+      if (conn.events.length >= conn.maxDailyBookings) {
+        throw new Error('Daily booking limit reached. Please try another date.');
+      }
+
+      // 3. Check for overlapping bookings (CRITICAL - prevents double booking)
+      const overlappingEvent = await tx.calendarEvent.findFirst({
+        where: {
+          calendarConnectionId: connection.id,
+          status: { not: 'CANCELLED' },
+          OR: [
+            // New event starts during existing event
+            {
+              AND: [
+                { startTime: { lte: start } },
+                { endTime: { gt: start } },
+              ],
+            },
+            // New event ends during existing event
+            {
+              AND: [
+                { startTime: { lt: end } },
+                { endTime: { gte: end } },
+              ],
+            },
+            // New event completely contains existing event
+            {
+              AND: [
+                { startTime: { gte: start } },
+                { endTime: { lte: end } },
+              ],
+            },
+          ],
+        },
+      });
+
+      if (overlappingEvent) {
+        throw new Error('This time slot is already booked. Please choose another time.');
+      }
+
+      // 4. Create idempotency key using widget and timestamp
+      const idempotencyKey = `widget-${widgetId}-${eventData.attendeeEmail}-${start.getTime()}`;
+
+      // 5. Check for duplicate using idempotency key
+      const existingEvent = await tx.calendarEvent.findUnique({
+        where: { idempotencyKey },
+      });
+
+      if (existingEvent) {
+        return existingEvent; // Return existing event instead of creating duplicate
+      }
+
+      // 6. All checks passed - create the event
+      const calendarService = getCalendarService(c);
+
+      // Determine organizer email
+      const organizerEmail = connection.notificationEmail ||
+                            connection.standaloneAccountEmail ||
+                            'noreply@booking.com';
+
+      const event = await calendarService.createEvent(connection.id, {
+        calendarId: conn.calendarId,
+        summary: eventData.summary,
+        description: eventData.notes || eventData.description,
+        start: eventData.startTime,
+        end: eventData.endTime,
+        timeZone: eventData.timeZone,
+        attendeeEmail: eventData.attendeeEmail,
+        attendeeName: `${eventData.attendeeFirstName} ${eventData.attendeeLastName}`,
+        organizerEmail,
+        idempotencyKey,
+      });
+
+      // Update event with customer details
+      const updatedEvent = await tx.calendarEvent.update({
+        where: { id: event.id },
+        data: {
+          customerFirstName: eventData.attendeeFirstName,
+          customerLastName: eventData.attendeeLastName,
+          customerPhone: eventData.attendeePhone,
+          customerNotes: eventData.notes,
+          bookingReference: `BK-${Date.now().toString(36).toUpperCase()}`,
+        },
+      });
+
+      return updatedEvent;
+    });
+
+    const event = result;
+
+    // Send email notifications asynchronously (don't wait for completion)
+    if (connection.sendCustomerNotifications) {
+      sendAttendeeConfirmation({
+        attendeeEmail: eventData.attendeeEmail,
+        attendeeName: `${eventData.attendeeFirstName} ${eventData.attendeeLastName}`,
+        attendeeFirstName: eventData.attendeeFirstName,
+        attendeeLastName: eventData.attendeeLastName,
+        attendeePhone: eventData.attendeePhone,
+        startTime: eventData.startTime,
+        endTime: eventData.endTime,
+        timeZone: eventData.timeZone,
+        notes: eventData.notes,
+        calendarName: connection.calendarName,
+      }).catch(err => console.error('Failed to send attendee confirmation:', err));
+    }
+
+    // Send notification email to owner if enabled
+    if (connection.sendOwnerNotifications && connection.notificationEmail) {
+      sendOwnerNotification({
+        ownerEmail: connection.notificationEmail,
+        attendeeEmail: eventData.attendeeEmail,
+        attendeeName: `${eventData.attendeeFirstName} ${eventData.attendeeLastName}`,
+        attendeeFirstName: eventData.attendeeFirstName,
+        attendeeLastName: eventData.attendeeLastName,
+        attendeePhone: eventData.attendeePhone,
+        startTime: eventData.startTime,
+        endTime: eventData.endTime,
+        timeZone: eventData.timeZone,
+        notes: eventData.notes,
+        calendarName: connection.calendarName,
+      }).catch(err => console.error('Failed to send owner notification:', err));
+    }
+
+    return c.json({
+      event: {
+        id: event.id,
+        bookingReference: event.bookingReference,
+        startTime: event.startTime,
+        endTime: event.endTime,
+        status: event.status,
+      }
+    }, 201);
+  } catch (error) {
+    console.error('Widget booking error:', error);
+
+    // Handle specific error cases with appropriate status codes
+    if (error instanceof Error) {
+      if (error.message === 'Widget not found') {
+        return c.json({ error: error.message }, 404);
+      }
+      if (error.message.includes('Daily booking limit reached')) {
+        return c.json({ error: error.message }, 429);
+      }
+      if (error.message.includes('already booked')) {
+        return c.json({ error: error.message }, 409); // Conflict
+      }
+      return c.json({ error: error.message }, 500);
+    }
+
+    return c.json({ error: 'Failed to create booking. Please try again.' }, 500);
+  }
+});
+
+} // end of registerRoutes function
+
+export function registerCalendarRoutes(app: Hono<{ Bindings: Bindings }>) {
+  registerRoutes(app);
+}

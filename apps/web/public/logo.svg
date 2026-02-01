@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Omnical Studio">
+  <defs>
+    <linearGradient id="omnicalGrad" x1="96" y1="160" x2="416" y2="352" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#19C2FF"/>
+      <stop offset="0.55" stop-color="#5B4BFF"/>
+      <stop offset="1" stop-color="#D43CFF"/>
+    </linearGradient>
+  </defs>
+
+  <path
+    d="M120 256 C160 180 240 180 280 256 C320 332 400 332 440 256 C400 180 320 180 280 256 C240 332 160 332 120 256"
+    fill="none"
+    stroke="url(#omnicalGrad)"
+    stroke-width="64"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+
+  <circle cx="200" cy="256" r="56" fill="#0B1A2B" fill-opacity="0.92"/>
+  <circle cx="312" cy="256" r="56" fill="#0B1A2B" fill-opacity="0.92"/>
+
+  <!-- Chat bubble -->
+  <path
+    d="M176 246c0-12 10-22 22-22h26c12 0 22 10 22 22v14c0 12-10 22-22 22h-9l-14 12v-12h-3c-12 0-22-10-22-22v-14z"
+    fill="#FFFFFF"
+  />
+  <circle cx="204" cy="253" r="4.5" fill="#0B1A2B" fill-opacity="0.9"/>
+  <circle cx="216" cy="253" r="4.5" fill="#0B1A2B" fill-opacity="0.9"/>
+  <circle cx="228" cy="253" r="4.5" fill="#0B1A2B" fill-opacity="0.9"/>
+
+  <!-- Sparkle star -->
+  <path
+    d="M312 222l9 20 22 3-17 14 5 22-19-11-19 11 5-22-17-14 22-3 9-20z"
+    fill="#FFFFFF"
+  />
+</svg>

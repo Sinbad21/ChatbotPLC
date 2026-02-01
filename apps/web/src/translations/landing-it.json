@@ -1,0 +1,384 @@
+{
+  "meta": {
+    "title": "Omnical Studio - Aggiungi un Chatbot AI al Tuo Sito in Pochi Minuti",
+    "description": "Crea chatbot AI personalizzati addestrati sui tuoi dati. Nessun codice richiesto. Integra con il tuo sito, WhatsApp, Telegram e altro. Inizia gratis oggi."
+  },
+  "nav": {
+    "features": "Funzionalità",
+    "pricing": "Prezzi",
+    "docs": "Documentazione",
+    "login": "Accedi",
+    "startFree": "Inizia Gratis"
+  },
+  "hero": {
+    "badge": "Prova la Demo Live",
+    "headline": "Aggiungi un chatbot intelligente al tuo sito in pochi minuti",
+    "subheadline": "Crea chatbot AI addestrati sui tuoi contenuti. Distribuisci sul tuo sito, WhatsApp, Telegram e altro. Nessun codice richiesto.",
+    "ctaPrimary": "Inizia Gratis",
+    "ctaSecondary": "Guarda Demo",
+    "microCopy": "Nessuna carta  Cancella quando vuoi"
+  },
+  "trust": {
+    "title": "Scelto da aziende innovative"
+  },
+  "valueProps": {
+    "title": "Tutto ciò di cui hai bisogno per creare chatbot intelligenti",
+    "items": [
+      {
+        "title": "Addestra sui Tuoi Dati",
+        "description": "Carica documenti, scrapa siti web o incolla contenuti. Il tuo bot impara dalla tua base di conoscenza."
+      },
+      {
+        "title": "Supporto Multi-Modello",
+        "description": "Scegli tra OpenAI GPT-5, Claude 3.5, Google Gemini o Llama. Cambia quando vuoi."
+      },
+      {
+        "title": "Widget No-Code",
+        "description": "Integra widget di chat eleganti sul tuo sito con una riga di codice. Completamente personalizzabili."
+      },
+      {
+        "title": "Analisi e Costi",
+        "description": "Traccia conversazioni, token, costi per modello. Esporta dati e ottimizza la spesa."
+      },
+      {
+        "title": "22 Lingue",
+        "description": "Rileva automaticamente la lingua dell'utente o impostala manualmente. Supporto i18n completo per portata globale."
+      },
+      {
+        "title": "Sicurezza Enterprise",
+        "description": "Conforme GDPR, crittografia at-rest, pronto SOC 2. I tuoi dati restano sicuri."
+      }
+    ]
+  },
+  "demo": {
+    "title": "Provalo tu stesso",
+    "subtitle": "Chatta con il nostro bot demo addestrato sulla documentazione di Omnical Studio",
+    "placeholder": "Chiedimi qualsiasi cosa su Omnical Studio...",
+    "themeToggle": "Cambia tema"
+  },
+  "features": {
+    "title": "Funzionalità potenti per chatbot moderni",
+    "subtitle": "Tutto ciò di cui hai bisogno per creare, addestrare e distribuire AI conversazionale intelligente",
+    "items": [
+      {
+        "title": "Chat e Cronologia",
+        "description": "Cronologia conversazioni completa con filtri, ricerca ed esportazione. Addestra sulle risposte per migliorare il bot."
+      },
+      {
+        "title": "Addestramento Documenti",
+        "description": "Carica PDF, DOCX, TXT, CSV fino a 25MB. Anteprima, attiva/disattiva inclusione e gestisci la knowledge base."
+      },
+      {
+        "title": "Web Scraping",
+        "description": "Scopri automaticamente sitemap o scrapa siti web. Anteprima contenuti prima di aggiungerli ai dati di training."
+      },
+      {
+        "title": "Branding Personalizzato",
+        "description": "Carica logo, personalizza colori (7 opzioni tema), abbina perfettamente l'identità del tuo brand."
+      },
+      {
+        "title": "Multi-Canale Pronto",
+        "description": "Distribuisci su WhatsApp, Telegram, Slack, Discord. Un bot, più canali. (Prossimamente)"
+      },
+      {
+        "title": "Template Prompt",
+        "description": "Template predefiniti per supporto clienti, vendite, assistenza tecnica. O scrivi il tuo."
+      },
+      {
+        "title": "Analisi Utilizzo",
+        "description": "Grafici giornalieri per chiamate, token, costi. Suddivisi per modello e provider. Esportazione CSV inclusa."
+      },
+      {
+        "title": "FAQ e Intent",
+        "description": "Crea risposte basate su pattern. Addestra dalla cronologia conversazioni con un click."
+      }
+    ]
+  },
+  "integrations": {
+    "title": "Si integra con i tuoi strumenti preferiti",
+    "comingSoon": "Prossimamente"
+  },
+  "pricing": {
+    "title": "Prezzi semplici e trasparenti",
+    "subtitle": "Stesse funzionalità che trovi sul mercato, con una marcia in più: setup rapido, costi chiari e piani che scalano davvero. Upgrade o downgrade quando vuoi.",
+    "monthly": "Mensile",
+    "annually": "Annuale",
+    "annualDiscount": "Risparmia 20%",
+    "customPrice": "Su misura",
+    "currencySymbol": "€",
+    "popularBadge": "Più scelto",
+    "personalize": {
+      "title": "Personalizza per la tua attività",
+      "segmentLabel": "Tipo di attività",
+      "goalLabel": "Obiettivo principale",
+      "segments": {
+        "local": {
+          "label": "Attività locale",
+          "focus": [
+            "Ottimizzato per prenotazioni e richieste",
+            "Setup rapido con widget sul sito",
+            "Risposte chiare su servizi, orari e FAQ"
+          ]
+        },
+        "agency": {
+          "label": "Agenzia / Studio",
+          "focus": [
+            "Impostazione pronta per clienti e branding",
+            "Più bot per più clienti",
+            "Analytics per dimostrare valore"
+          ]
+        },
+        "saas": {
+          "label": "SaaS",
+          "focus": [
+            "Riduci il carico del supporto con risposte self-serve",
+            "Onboarding dentro al prodotto",
+            "Misura l'uso e migliora i contenuti"
+          ]
+        }
+      },
+      "goals": {
+        "bookings": {
+          "label": "Più prenotazioni",
+          "focus": [
+            "Converti visitatori in prenotazioni",
+            "Rispondi a domande su disponibilità e prezzi",
+            "Raccogli contatti quando serve"
+          ]
+        },
+        "leads": {
+          "label": "Più lead",
+          "focus": [
+            "Qualifica i lead con domande guidate",
+            "Raccogli email/telefono e contesto",
+            "Porta i prospect allo step successivo"
+          ]
+        },
+        "support": {
+          "label": "Miglior supporto",
+          "focus": [
+            "Riduci ticket ripetitivi con FAQ",
+            "Risposte 24/7 alle domande sul prodotto",
+            "Migliora la documentazione con conversazioni reali"
+          ]
+        }
+      }
+    },
+    "plans": [
+      {
+        "id": "base",
+        "name": "Base",
+        "price": 29,
+        "priceAnnual": 23,
+        "description": "Professionisti e micro-attività che vogliono iniziare con un solo canale.",
+        "features": [
+          "1 bot",
+          "1 canale (Web o WhatsApp)",
+          "Widget prenotazioni + calendario",
+          "Promemoria automatici",
+          "Raccolta lead",
+          "Upload documenti (base)",
+          "Analytics essenziali",
+          "1 utente",
+          "Supporto email"
+        ],
+        "cta": "Inizia Prova Gratuita",
+        "popular": false
+      },
+      {
+        "id": "pro",
+        "name": "Pro",
+        "price": 79,
+        "priceAnnual": 63,
+        "description": "Attività in crescita che vogliono più automazioni e canali.",
+        "features": [
+          "Fino a 3 bot",
+          "23 canali (Web, WhatsApp, Telegram)",
+          "Google Calendar avanzato",
+          "Conversazioni e lead illimitati (fair use)",
+          "Knowledge base con scraping siti",
+          "Analytics avanzate",
+          "Fino a 3 utenti",
+          "Supporto prioritario email"
+        ],
+        "cta": "Inizia Prova Gratuita",
+        "popular": false
+      },
+      {
+        "id": "pro-plus",
+        "name": "Pro+ (consigliato)",
+        "price": 129,
+        "priceAnnual": 103,
+        "description": "Agenzie e studi che gestiscono più clienti/brand.",
+        "features": [
+          "Tutto Pro",
+          "Fino a 10 bot",
+          "Multicanale completo (Web, WhatsApp, Telegram, Slack)",
+          "BYOK (API key OpenAI del cliente)",
+          "Review Bot incluso (Stripe, WooCommerce, Shopify)",
+          "Scraping / docs esteso",
+          "Onboarding prioritario 1:1",
+          "Fino a 5 utenti"
+        ],
+        "cta": "Inizia Prova Gratuita",
+        "popular": true
+      },
+      {
+        "id": "business",
+        "name": "Business",
+        "price": 299,
+        "priceAnnual": 239,
+        "description": "Aziende strutturate e catene con volumi alti.",
+        "features": [
+          "Tutto Pro+",
+          "20+ bot",
+          "Limiti alti su conversazioni e booking",
+          "Ruoli e permessi avanzati",
+          "Audit log",
+          "Più workspace / siti",
+          "Supporto via email + call periodiche",
+          "Opzioni di reportistica custom"
+        ],
+        "cta": "Contatta Vendite",
+        "popular": false
+      },
+      {
+        "id": "enterprise",
+        "name": "Enterprise",
+        "price": "Su misura",
+        "priceAnnual": "Su misura",
+        "description": "Gruppi e corporate con esigenze specifiche.",
+        "features": [
+          "Tutto Business",
+          "SSO/SAML",
+          "Limiti personalizzati",
+          "SLA e sicurezza avanzata",
+          "Integrazioni custom (CRM, data warehouse)",
+          "Success manager dedicato"
+        ],
+        "cta": "Contatta Vendite",
+        "popular": false
+      }
+    ],
+    "perMonth": "/mese",
+    "billedAnnually": "fatturato annualmente",
+    "billedMonthly": "fatturato mensilmente"
+  },
+  "testimonials": {
+    "title": "Amato da team in tutto il mondo",
+    "items": [
+      {
+        "name": "Sarah Chen",
+        "role": "Head of Support, TechCorp",
+        "avatar": "SC",
+        "rating": 5,
+        "text": "Omnical Studio ha ridotto i nostri ticket di supporto del 60% nel primo mese. L'addestramento sui nostri documenti è stato perfetto."
+      },
+      {
+        "name": "Marcus Weber",
+        "role": "Fondatore, StartupXYZ",
+        "avatar": "MW",
+        "rating": 5,
+        "text": "Abbiamo distribuito un chatbot in meno di 10 minuti. Il ROI è stato immediato. Consigliato per qualsiasi SaaS."
+      },
+      {
+        "name": "Lisa Park",
+        "role": "Direttore Marketing, Acme Inc",
+        "avatar": "LP",
+        "rating": 5,
+        "text": "Le analisi sono fantastiche. Possiamo vedere esattamente cosa chiedono gli utenti e migliorare la nostra strategia di contenuti."
+      },
+      {
+        "name": "Ahmed Hassan",
+        "role": "CTO, CloudSystems",
+        "avatar": "AH",
+        "rating": 5,
+        "text": "La sicurezza era la nostra preoccupazione principale. La conformità GDPR e la crittografia di Omnical Studio ci hanno dato tranquillità."
+      },
+      {
+        "name": "Emma Thompson",
+        "role": "Product Manager, DataCo",
+        "avatar": "ET",
+        "rating": 5,
+        "text": "Il supporto multi-modello è rivoluzionario. Possiamo testare GPT vs Claude e scegliere quello che funziona meglio."
+      }
+    ]
+  },
+  "faq": {
+    "title": "Domande Frequenti",
+    "items": [
+      {
+        "question": "Come funziona la prova gratuita?",
+        "answer": "Ottieni 7 giorni di accesso gratuito a tutte le funzionalità Pro. Nessuna carta richiesta. Cancella prima della fine della prova e non verrai addebitato."
+      },
+      {
+        "question": "Posso cambiare piano successivamente?",
+        "answer": "Sì, puoi fare upgrade o downgrade in qualsiasi momento. Se fai upgrade, ti verrà addebitata la differenza proporzionale. Se fai downgrade, il credito si applica al prossimo ciclo di fatturazione."
+      },
+      {
+        "question": "Quali modelli AI supportate?",
+        "answer": "Supportiamo OpenAI GPT-5 e GPT-4, Anthropic Claude 3.5, Google Gemini e Llama 3.1. Puoi cambiare modello in qualsiasi momento dal tuo dashboard."
+      },
+      {
+        "question": "Come viene calcolato il prezzo?",
+        "answer": "Il prezzo si basa sul numero di messaggi al mese. Ogni messaggio (input utente + risposta bot) conta come un messaggio. I messaggi non utilizzati non vengono riportati."
+      },
+      {
+        "question": "Posso addestrare il bot sui miei documenti privati?",
+        "answer": "Assolutamente. Carica PDF, documenti Word, fogli di calcolo o incolla testo. Puoi anche scrapare automaticamente il tuo sito. Tutti i dati sono crittografati e mai condivisi."
+      },
+      {
+        "question": "Offrite rimborsi?",
+        "answer": "Sì, offriamo una garanzia soddisfatti o rimborsati di 30 giorni. Basta inviarci un'email e processeremo il tuo rimborso entro 5 giorni lavorativi."
+      },
+      {
+        "question": "I miei dati sono sicuri e conformi al GDPR?",
+        "answer": "Sì. Tutti i dati sono crittografati at-rest e in transito. Siamo conformi GDPR e certificati SOC 2 Type II. Puoi esportare o eliminare i tuoi dati in qualsiasi momento."
+      },
+      {
+        "question": "Posso usare la mia chiave API OpenAI?",
+        "answer": "Sì: nei piani che includono \"Usa le tue API key\" (es. Pro+ e superiori). In questo modo controlli direttamente i costi del provider."
+      },
+      {
+        "question": "Quali lingue supporta il chatbot?",
+        "answer": "Il chatbot può rispondere in 22 lingue inclusi inglese, spagnolo, francese, tedesco, italiano, portoghese, cinese, giapponese e altro. Rileva automaticamente la lingua dell'utente."
+      },
+      {
+        "question": "Come incorporo il chatbot sul mio sito?",
+        "answer": "Copia una singola riga di codice JavaScript dal tuo dashboard e incollala prima del tag </body> di chiusura. Fatto. Styling completamente personalizzabile disponibile."
+      }
+    ]
+  },
+  "finalCta": {
+    "title": "Costruisci il tuo chatbot AI in pochi minuti",
+    "subtitle": "Unisciti a migliaia di aziende che usano Omnical Studio per automatizzare il supporto e aumentare l'engagement.",
+    "cta": "Inizia Prova Gratuita",
+    "microCopy": "Nessuna carta richiesta"
+  },
+  "footer": {
+    "tagline": "Chatbot intelligenti per siti moderni",
+    "product": "Prodotto",
+    "features": "Funzionalità",
+    "pricing": "Prezzi",
+    "docs": "Documentazione",
+    "changelog": "Changelog",
+    "company": "Azienda",
+    "about": "Chi Siamo",
+    "blog": "Blog",
+    "careers": "Carriere",
+    "contact": "Contatti",
+    "legal": "Legale",
+    "privacy": "Privacy Policy",
+    "terms": "Termini di Servizio",
+    "gdpr": "GDPR",
+    "social": "Social",
+    "rights": " 2025 Omnical Studio. Tutti i diritti riservati.",
+    "poweredBy": "Powered by",
+    "newsletter": {
+      "title": "Resta aggiornato",
+      "subtitle": "Ricevi le ultime funzionalità e suggerimenti",
+      "placeholder": "Inserisci la tua email",
+      "cta": "Iscriviti"
+    }
+  }
+}
