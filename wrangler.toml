@@ -1,7 +1,7 @@
 # Root-level Wrangler config for Cloudflare Workers Builds / Pages.
 # Cloudflare runs `wrangler deploy` from the repo root, so this file must exist.
 
-name = "chatbotstudio-web"
+name = "plcassistant"
 main = "apps/web/.open-next/worker.js"
 compatibility_date = "2025-05-05"
 compatibility_flags = ["nodejs_compat"]
