@@ -58,10 +58,10 @@ interface Message {
 }
 
 const BASE_PROMPTS: string[] = [
-  'Vorrei aumentare i lead: che bot mi consigli?',
-  'Puoi fissare appuntamenti su Google Calendar?',
-  'Come funziona l’integrazione con WhatsApp?',
-  'Qual è il piano migliore per iniziare?',
+  'Come funziona con i miei PDF?',
+  'Quanto tempo serve per iniziare?',
+  'Posso provarlo con la mia documentazione?',
+  'Funziona in italiano e inglese?',
 ];
 
 const MAX_BOT_CHARS = 360;
@@ -76,7 +76,7 @@ const ChatSlide: React.FC = () => {
   const [displayedMessages, setDisplayedMessages] = useState<Message[]>(() => [
     {
       id: 1,
-      text: 'Ciao! Prova la chat: scegli un prompt qui sotto oppure scrivi tu.',
+      text: 'Ciao! Prova a fare una domanda sulla documentazione tecnica.',
       sender: 'bot',
     },
   ]);
@@ -183,7 +183,7 @@ const ChatSlide: React.FC = () => {
       setIsTyping(false);
       setDisplayedMessages(prev => [...prev, {
         id: Date.now(),
-        text: clampBotReply('Interessante! Posso aiutarti a creare un chatbot per la tua azienda. Cosa vorresti sapere?'),
+        text: clampBotReply('Posso aiutarti a trovare informazioni nella tua documentazione tecnica. Cosa vorresti sapere?'),
         sender: 'bot'
       }]);
     } finally {
@@ -226,7 +226,7 @@ const ChatSlide: React.FC = () => {
             setDisplayedMessages([
               {
                 id: 1,
-                text: 'Ciao! Prova la chat: scegli un prompt qui sotto oppure scrivi tu.',
+                text: 'Ciao! Prova a fare una domanda sulla documentazione tecnica.',
                 sender: 'bot',
               },
             ]);
@@ -528,7 +528,7 @@ export const Hero: React.FC = () => {
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
               <Sparkles className="w-3 h-3 text-platinum-300 animate-pulse" />
               <span className="text-platinum-300 text-xs uppercase tracking-[0.2em] font-medium">
-                Next Gen AI Architecture
+                Supporto Tecnico su Documentazione Aziendale
               </span>
             </div>
           </motion.div>
@@ -540,9 +540,9 @@ export const Hero: React.FC = () => {
             className="mb-6"
           >
             <h1 className="font-sans text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-platinum-50 via-platinum-200 to-platinum-500 leading-[1.05]">
-              Il tuo business <br />
+              I tuoi manuali <br />
               <span className="relative inline-block">
-                che lavora per te
+                rispondono. 24/7.
               </span>
             </h1>
           </motion.div>
@@ -553,7 +553,7 @@ export const Hero: React.FC = () => {
             transition={{ duration: 0.8, delay: 0.5 }}
             className="max-w-xl mx-auto lg:mx-0 text-platinum-400 text-base sm:text-lg font-light leading-relaxed mb-8 sm:mb-10"
           >
-            Non un semplice chatbot. Un assistente virtuale forgiato nel platino digitale. Integra l&apos;intelligenza artificiale su WhatsApp, Telegram e Web con un&apos;eleganza senza pari.
+            Riduci i ticket ripetitivi del 70%. Il tuo personale tecnico smette di essere interrotto. I clienti trovano le risposte da soli, direttamente dalla tua documentazione.
           </motion.p>
 
           <motion.div
@@ -563,22 +563,22 @@ export const Hero: React.FC = () => {
             className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4"
           >
             <Link
-              href="/auth/register"
+              href="/contact"
               className="relative px-8 py-3 bg-platinum-100 text-platinum-950 font-bold tracking-widest uppercase text-sm overflow-hidden group rounded-sm hover:shadow-[0_0_30px_rgba(255,255,255,0.5)] transition-all duration-300 active:scale-95 transform text-center"
             >
               <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/80 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out"></span>
               <span className="relative flex items-center justify-center gap-2 z-10">
                 <Bot className="w-4 h-4" />
-                Crea il Tuo Bot Gratis
+                Richiedi una Demo
               </span>
             </Link>
             <a
-              href="/pricing"
+              href="#come-funziona"
               className="relative px-8 py-3 border border-platinum-700 text-platinum-300 font-medium tracking-widest uppercase text-sm transition-all duration-300 rounded-sm backdrop-blur-sm group overflow-hidden hover:text-white hover:border-platinum-400 hover:shadow-[0_0_20px_rgba(255,255,255,0.2)] active:scale-95 transform text-center"
             >
               <span className="absolute inset-0 w-full h-full bg-platinum-800/0 group-hover:bg-platinum-800/40 transition-colors duration-300"></span>
               <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out"></span>
-              <span className="relative z-10">Confronta i Piani</span>
+              <span className="relative z-10">Vedi Come Funziona</span>
             </a>
           </motion.div>
         </div>
@@ -645,23 +645,23 @@ export const Hero: React.FC = () => {
         className="z-10 container mx-auto px-4 sm:px-6 mt-16 md:mt-24"
       >
         <div className="border-t border-platinum-800/50 pt-10">
-          <p className="text-xs text-platinum-500 uppercase tracking-[0.2em] text-center mb-8">Risultati Concreti</p>
+          <p className="text-xs text-platinum-500 uppercase tracking-[0.2em] text-center mb-8">Risultati Misurabili</p>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 max-w-3xl mx-auto">
             <div className="text-center">
-              <div className="text-3xl md:text-4xl font-serif font-bold text-platinum-100 mb-1">500+</div>
-              <div className="text-xs text-platinum-500 uppercase tracking-wide">Aziende Attive</div>
+              <div className="text-3xl md:text-4xl font-serif font-bold text-platinum-100 mb-1">-70%</div>
+              <div className="text-xs text-platinum-500 uppercase tracking-wide">Ticket Ripetitivi</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl md:text-4xl font-serif font-bold text-platinum-100 mb-1">10K+</div>
-              <div className="text-xs text-platinum-500 uppercase tracking-wide">Conversazioni/Giorno</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl md:text-4xl font-serif font-bold text-platinum-100 mb-1">98%</div>
-              <div className="text-xs text-platinum-500 uppercase tracking-wide">Soddisfazione</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl md:text-4xl font-serif font-bold text-platinum-100 mb-1">&lt;1s</div>
+              <div className="text-3xl md:text-4xl font-serif font-bold text-platinum-100 mb-1">&lt;3s</div>
               <div className="text-xs text-platinum-500 uppercase tracking-wide">Tempo Risposta</div>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl md:text-4xl font-serif font-bold text-platinum-100 mb-1">24/7</div>
+              <div className="text-xs text-platinum-500 uppercase tracking-wide">Senza Personale Extra</div>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl md:text-4xl font-serif font-bold text-platinum-100 mb-1">0</div>
+              <div className="text-xs text-platinum-500 uppercase tracking-wide">Formazione Richiesta</div>
             </div>
           </div>
         </div>

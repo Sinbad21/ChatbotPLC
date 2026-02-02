@@ -20,8 +20,8 @@ export const Footer: React.FC = () => {
               </span>
             </div>
             <p className="text-sm text-platinum-500 leading-relaxed mb-6">
-              Architettura conversazionale di lusso. <br/>
-              Dove l&apos;Intelligenza Artificiale incontra l&apos;eleganza del design puro.
+              Supporto documentale automatico per aziende tecniche. <br/>
+              Riduci ticket, interruzioni e tempi di formazione.
             </p>
             <div className="flex gap-4">
               <a href="#" className="w-8 h-8 rounded-full bg-platinum-900 flex items-center justify-center text-platinum-400 hover:bg-platinum-100 hover:text-black transition-all duration-300 hover:scale-110 active:scale-95">
@@ -43,8 +43,8 @@ export const Footer: React.FC = () => {
             </h4>
             <ul className="space-y-3 text-sm">
               <li><Link href="/" className="text-platinum-500 hover:text-white hover:translate-x-1 transition-all inline-block">Home</Link></li>
-              <li><Link href="/about" className="text-platinum-500 hover:text-white hover:translate-x-1 transition-all inline-block">La Tecnologia</Link></li>
-              <li><Link href="/contact" className="text-platinum-500 hover:text-white hover:translate-x-1 transition-all inline-block">Soluzioni AI</Link></li>
+              <li><Link href="/#come-funziona" className="text-platinum-500 hover:text-white hover:translate-x-1 transition-all inline-block">Come Funziona</Link></li>
+              <li><Link href="/contact" className="text-platinum-500 hover:text-white hover:translate-x-1 transition-all inline-block">Richiedi Demo</Link></li>
               <li><Link href="/pricing" className="text-platinum-500 hover:text-white hover:translate-x-1 transition-all inline-block">Prezzi</Link></li>
             </ul>
           </div>
@@ -63,8 +63,8 @@ export const Footer: React.FC = () => {
           </div>
 
           <div>
-            <h4 className="text-white font-bold uppercase tracking-widest text-xs mb-6">Futuro Digitale</h4>
-            <p className="text-xs text-platinum-500 mb-4">Iscriviti per ricevere aggiornamenti sul mondo dell&apos;IA.</p>
+            <h4 className="text-white font-bold uppercase tracking-widest text-xs mb-6">Richiedi una Demo</h4>
+            <p className="text-xs text-platinum-500 mb-4">Ti mostriamo il sistema in 20 minuti con documentazione reale.</p>
             <div className="flex flex-col gap-3">
               <div className="relative group">
                 <input
@@ -74,7 +74,7 @@ export const Footer: React.FC = () => {
                 />
               </div>
               <button className="w-full bg-platinum-200 text-platinum-950 px-4 py-3 text-xs font-bold uppercase tracking-widest hover:bg-white hover:shadow-[0_0_20px_rgba(255,255,255,0.5)] transition-all duration-300 rounded-sm active:scale-95">
-                Connetti
+                Contattaci
               </button>
             </div>
           </div>
@@ -82,7 +82,7 @@ export const Footer: React.FC = () => {
 
         <div className="border-t border-platinum-900 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-xs text-platinum-700">
-            © {new Date().getFullYear()} OMNICAL STUDIO. Engineered for excellence.
+            © {new Date().getFullYear()} OMNICAL STUDIO. Supporto tecnico automatico.
           </p>
         </div>
       </div>

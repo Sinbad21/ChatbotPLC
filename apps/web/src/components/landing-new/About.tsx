@@ -19,8 +19,8 @@ export const About: React.FC = () => {
           >
             <div className="aspect-square overflow-hidden rounded-sm relative z-10 bg-platinum-900 border border-platinum-800">
                <img
-                src="https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=2070&auto=format&fit=crop"
-                alt="AI Robot Intelligence"
+                src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2070&auto=format&fit=crop"
+                alt="Documentazione tecnica industriale"
                 className="w-full h-full object-cover opacity-80 grayscale-[0.2] group-hover:grayscale-0 group-hover:scale-110 transition-all duration-1000 ease-out"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-platinum-950 via-transparent to-transparent" />
@@ -28,7 +28,7 @@ export const About: React.FC = () => {
               <div className="absolute bottom-6 left-6 right-6 bg-platinum-950/90 backdrop-blur-md border border-platinum-700 p-4 rounded-sm transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
                 <div className="flex items-center gap-3">
                   <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse shadow-[0_0_10px_#10b981]" />
-                  <p className="text-xs font-mono text-platinum-300 uppercase tracking-widest">Neural Core: Online</p>
+                  <p className="text-xs font-mono text-platinum-300 uppercase tracking-widest">Documentazione: Indicizzata</p>
                 </div>
               </div>
             </div>
@@ -45,24 +45,24 @@ export const About: React.FC = () => {
           >
             <h3 className="text-platinum-500 uppercase tracking-[0.2em] text-xs font-bold mb-4 flex items-center gap-2">
               <span className="w-8 h-[1px] bg-platinum-500"></span>
-              La Nuova Era
+              Il Problema
             </h3>
             <h2 className="font-serif text-4xl md:text-5xl text-white mb-6 leading-tight">
-              Oltre la semplice <br/>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-platinum-300 to-platinum-600">Automazione</span>
+              Il costo nascosto della <br/>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-platinum-300 to-platinum-600">documentazione inutilizzata</span>
             </h2>
             <p className="text-platinum-400 mb-6 leading-relaxed">
-              Creiamo entità digitali capaci di comprendere, imparare ed interagire. I nostri chatbot non sono semplici script, ma estensioni eleganti del tuo brand, attivi 24 ore su 24.
+              Hai manuali, schede tecniche, procedure operative. Nessuno le legge. Il supporto tecnico risponde sempre alle stesse domande. I tecnici sul campo chiamano invece di consultare i PDF.
             </p>
             <p className="text-platinum-400 mb-8 leading-relaxed">
-              Ogni interazione è calibrata per essere fluida come il mercurio e solida come il platino. Dalla gestione dei lead al supporto clienti, l&apos;AI lavora in background per far risplendere il tuo business.
+              Nuovi assunti impiegano settimane a orientarsi. I clienti aprono ticket che potrebbero risolvere da soli. Ogni interruzione costa tempo. Ogni ticket ripetuto è denaro perso.
             </p>
 
             <div className="flex flex-col gap-4">
               {[
-                { icon: <Network size={20} />, text: "Reti Neurali Avanzate" },
-                { icon: <Cpu size={20} />, text: "Elaborazione Real-Time" },
-                { icon: <Lock size={20} />, text: "Privacy Blindata" }
+                { icon: <Network size={20} />, text: "Ticket ripetitivi al supporto" },
+                { icon: <Cpu size={20} />, text: "Personale tecnico interrotto" },
+                { icon: <Lock size={20} />, text: "Onboarding lento e costoso" }
               ].map((item, idx) => (
                 <div key={idx} className="flex items-center gap-4 p-3 border-b border-platinum-900 hover:border-platinum-700 transition-colors group cursor-default">
                   <span className="text-platinum-600 group-hover:text-platinum-200 transition-colors">{item.icon}</span>

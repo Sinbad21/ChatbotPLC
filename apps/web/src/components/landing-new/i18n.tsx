@@ -41,21 +41,21 @@ const DICT: Record<LandingNewLang, Dict> = {
   it: {
     nav: {
       home: 'Home',
-      about: 'Chi Siamo',
-      services: 'Servizi',
+      about: 'Il Problema',
+      services: 'Benefici',
       pricing: 'Prezzi',
       login: 'Accedi',
       language: 'Lingua',
     },
     pricing: {
-      title: 'Investi nel Futuro',
-      detailsCta: 'Dettagli completi e add-on',
+      title: 'Scegli il Piano',
+      detailsCta: 'Dettagli completi',
       billingMonthly: 'Mensile',
       billingYearly: 'Annuale',
       billedAnnually: 'fatturato annualmente',
       activityLabel: 'Tipo di attività',
       goalLabel: 'Obiettivo principale',
-      highlightPrefix: 'Evidenziamo le funzionalità più rilevanti per:',
+      highlightPrefix: 'Funzionalità rilevanti per:',
       segments: {
         local: 'Attività locale',
         agency: 'Agenzia',
@@ -64,7 +64,7 @@ const DICT: Record<LandingNewLang, Dict> = {
       goals: {
         bookings: 'Prenotazioni',
         leads: 'Lead',
-        support: 'Supporto',
+        support: 'Supporto Tecnico',
       },
       focus: {
         local: {
@@ -84,17 +84,17 @@ const DICT: Record<LandingNewLang, Dict> = {
         },
       },
       plans: {
-        base: { name: 'Base', desc: "Per iniziare velocemente con tutto l'essenziale", cta: 'Inizia prova gratuita' },
-        pro: { name: 'Pro', desc: 'Per team in crescita e volumi maggiori', cta: 'Inizia prova gratuita' },
-        proPlus: { name: 'Pro+', desc: 'Il miglior rapporto valore/prezzo', cta: 'Scegli Pro+' },
-        business: { name: 'Business', desc: 'Per scalare con controllo e governance', cta: 'Contatta vendite' },
+        base: { name: 'Base', desc: 'Per iniziare con la documentazione essenziale', cta: 'Richiedi Demo' },
+        pro: { name: 'Pro', desc: 'Per team tecnici e volumi maggiori', cta: 'Richiedi Demo' },
+        proPlus: { name: 'Pro+', desc: 'Il miglior rapporto valore/prezzo', cta: 'Richiedi Demo' },
+        business: { name: 'Business', desc: 'Per scalare con controllo e governance', cta: 'Contatta Vendite' },
         enterprise: {
           name: 'Enterprise',
           desc: 'Prezzi e funzionalità personalizzate con SLA',
-          cta: 'Contatta vendite',
+          cta: 'Contatta Vendite',
           customPrice: 'Su misura',
         },
-        bestValue: 'Best Value',
+        bestValue: 'Consigliato',
         perMonth: '/mese',
       },
     },
@@ -102,21 +102,21 @@ const DICT: Record<LandingNewLang, Dict> = {
   en: {
     nav: {
       home: 'Home',
-      about: 'About',
-      services: 'Services',
+      about: 'The Problem',
+      services: 'Benefits',
       pricing: 'Pricing',
       login: 'Login',
       language: 'Language',
     },
     pricing: {
-      title: 'Invest in the Future',
-      detailsCta: 'Full pricing details & add-ons',
+      title: 'Choose Your Plan',
+      detailsCta: 'Full pricing details',
       billingMonthly: 'Monthly',
       billingYearly: 'Yearly',
       billedAnnually: 'billed annually',
       activityLabel: 'Business type',
       goalLabel: 'Main goal',
-      highlightPrefix: "We highlight the most relevant features for:",
+      highlightPrefix: "Relevant features for:",
       segments: {
         local: 'Local business',
         agency: 'Agency',
@@ -125,7 +125,7 @@ const DICT: Record<LandingNewLang, Dict> = {
       goals: {
         bookings: 'Bookings',
         leads: 'Leads',
-        support: 'Support',
+        support: 'Technical Support',
       },
       focus: {
         local: {
@@ -145,17 +145,17 @@ const DICT: Record<LandingNewLang, Dict> = {
         },
       },
       plans: {
-        base: { name: 'Base', desc: 'Everything you need to get started', cta: 'Start free trial' },
-        pro: { name: 'Pro', desc: 'For growing teams and higher volume', cta: 'Start free trial' },
-        proPlus: { name: 'Pro+', desc: 'Best value for money', cta: 'Choose Pro+' },
-        business: { name: 'Business', desc: 'Scale with control and governance', cta: 'Contact sales' },
+        base: { name: 'Base', desc: 'Start with essential documentation', cta: 'Request Demo' },
+        pro: { name: 'Pro', desc: 'For technical teams and higher volume', cta: 'Request Demo' },
+        proPlus: { name: 'Pro+', desc: 'Best value for money', cta: 'Request Demo' },
+        business: { name: 'Business', desc: 'Scale with control and governance', cta: 'Contact Sales' },
         enterprise: {
           name: 'Enterprise',
           desc: 'Custom pricing and features with SLA',
-          cta: 'Contact sales',
+          cta: 'Contact Sales',
           customPrice: 'Custom',
         },
-        bestValue: 'Best Value',
+        bestValue: 'Recommended',
         perMonth: '/mo',
       },
     },

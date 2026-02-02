@@ -29,7 +29,7 @@ export const Navbar: React.FC = () => {
   const navItems = [
     { id: 'home', label: t('nav').home },
     { id: 'chi-siamo', label: t('nav').about },
-    { id: 'servizi', label: t('nav').services },
+    { id: 'come-funziona', label: 'Come Funziona' },
     { id: 'prezzi', label: t('nav').pricing },
   ];
 

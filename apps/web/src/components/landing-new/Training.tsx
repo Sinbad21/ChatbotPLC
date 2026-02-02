@@ -2,62 +2,32 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FileText, Layers, Database, Sliders, Zap, Shield, History, Puzzle } from 'lucide-react';
+import { FileText, Database, Zap } from 'lucide-react';
 
 const steps = [
   {
     id: "01",
-    title: "Prompt Principale",
-    desc: "Definisce ruolo, tono, limiti e stile. È la 'personalità' fissa e immutabile del bot.",
+    title: "Carica la Documentazione",
+    desc: "PDF, Word, Excel, testi. Il sistema accetta i formati che già usi. Non serve riscrivere nulla.",
     icon: <FileText />
   },
   {
     id: "02",
-    title: "Prompt Dinamici",
-    desc: "Specializzazione su richiesta. Aggiunti dall'utente per compiti specifici come vendite o supporto.",
-    icon: <Layers />
-  },
-  {
-    id: "03",
-    title: "Knowledge Base (RAG)",
-    desc: "Indicizzazione vettoriale. Recupera documenti pertinenti in tempo reale per risposte basate sui tuoi dati.",
+    title: "Il Sistema Indicizza",
+    desc: "I contenuti vengono elaborati e resi interrogabili. Ogni risposta cita la fonte originale.",
     icon: <Database />
   },
   {
-    id: "04",
-    title: "Parametri Neurali",
-    desc: "Configurazione di Temperature e Max Tokens. Bilanciano creatività e precisione chirurgica.",
-    icon: <Sliders />
-  },
-  {
-    id: "05",
-    title: "Tool Calling / API",
-    desc: "Azione pura. Il bot esegue funzioni esterne su CRM, siti web e sistemi di automazione.",
+    id: "03",
+    title: "Gli Utenti Interrogano",
+    desc: "Via web, widget integrato, o canali come WhatsApp. Risposte immediate, 24/7, senza intervento umano.",
     icon: <Zap />
-  },
-  {
-    id: "06",
-    title: "Regole & Restrizioni",
-    desc: "Sicurezza blindata. Filtri etici e contesto aziendale per proteggere l'integrità del brand.",
-    icon: <Shield />
-  },
-  {
-    id: "07",
-    title: "Memoria Storica",
-    desc: "Continuità di sessione. Il bot utilizza il contesto precedente per conversazioni fluide.",
-    icon: <History />
-  },
-  {
-    id: "08",
-    title: "Moduli Opzionali",
-    desc: "Espansione funzionale. Plugin per calendari, prenotazioni, scraping e lead collection.",
-    icon: <Puzzle />
   }
 ];
 
 export const Training: React.FC = () => {
   return (
-    <section className="py-24 bg-platinum-950 relative overflow-hidden border-t border-platinum-900">
+    <section id="come-funziona" className="py-24 bg-platinum-950 relative overflow-hidden border-t border-platinum-900">
       <div className="absolute inset-0 opacity-[0.05] pointer-events-none">
         <div className="absolute top-0 left-1/4 w-[1px] h-full bg-gradient-to-b from-transparent via-platinum-400 to-transparent" />
         <div className="absolute top-0 right-1/4 w-[1px] h-full bg-gradient-to-b from-transparent via-platinum-400 to-transparent" />
@@ -72,14 +42,14 @@ export const Training: React.FC = () => {
             viewport={{ once: true }}
             className="font-serif text-4xl md:text-5xl text-white mb-6"
           >
-            Architettura di <span className="text-platinum-400 italic">Apprendimento</span>
+            Operativo in <span className="text-platinum-400 italic">3 Passaggi</span>
           </motion.h2>
           <p className="text-platinum-500 max-w-2xl mx-auto">
-            Il protocollo neurale in 8 step. Ecco come trasformiamo un modello grezzo in un esperto del tuo settore.
+            Nessun setup complesso. Carica i documenti, il sistema li elabora, gli utenti trovano le risposte.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {steps.map((step, index) => (
             <motion.div
               key={index}

@@ -7,29 +7,29 @@ import { MessageSquareCode, BrainCircuit, Zap, Globe2 } from 'lucide-react';
 const services = [
   {
     icon: <MessageSquareCode className="w-8 h-8" />,
-    title: "Conversazioni Naturali",
-    desc: "NLP avanzato che comprende il contesto e le sfumature, non solo le parole chiave."
+    title: "Meno Ticket al Supporto",
+    desc: "Le domande frequenti vengono risolte automaticamente. Il team si concentra sui casi complessi."
   },
   {
     icon: <BrainCircuit className="w-8 h-8" />,
-    title: "Auto-Apprendimento",
-    desc: "Il bot diventa più intelligente ad ogni interazione, affinando le risposte nel tempo."
+    title: "Meno Interruzioni",
+    desc: "I tecnici sul campo consultano il sistema invece di chiamare. Chi lavora, lavora."
   },
   {
     icon: <Zap className="w-8 h-8" />,
-    title: "Integrazione Istantanea",
-    desc: "Si collega al tuo CRM e database esistente in millisecondi, senza frizioni."
+    title: "Onboarding Veloce",
+    desc: "I nuovi assunti interrogano la documentazione dal primo giorno. Meno affiancamento, meno errori."
   },
   {
     icon: <Globe2 className="w-8 h-8" />,
-    title: "Supporto Multilingua",
-    desc: "Comunica con eleganza in oltre 50 lingue, abbattendo ogni barriera globale."
+    title: "Supporto 24/7",
+    desc: "Clienti e collaboratori ottengono risposte anche fuori orario. Nessuna assunzione aggiuntiva."
   }
 ];
 
 export const Services: React.FC = () => {
   return (
-    <section id="servizi" className="py-24 bg-platinum-950 relative overflow-hidden">
+    <section id="benefici" className="py-24 bg-platinum-950 relative overflow-hidden">
       <div className="absolute inset-0 opacity-[0.03] bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]" />
 
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
@@ -44,10 +44,10 @@ export const Services: React.FC = () => {
           viewport={{ once: true }}
           className="text-center mb-20"
         >
-          <h2 className="font-serif text-4xl md:text-5xl text-white mb-4">Funzionalità d&apos;Argento</h2>
+          <h2 className="font-serif text-4xl md:text-5xl text-white mb-4">Benefici Concreti</h2>
           <div className="w-24 h-1 bg-gradient-to-r from-platinum-900 via-platinum-400 to-platinum-900 mx-auto rounded-full" />
           <p className="mt-6 text-platinum-400 max-w-2xl mx-auto">
-            La tecnologia incontra l&apos;estetica. Ogni funzionalità è progettata per brillare.
+            Risultati misurabili, non promesse. Ogni funzionalità riduce tempo, costi o rischio operativo.
           </p>
         </motion.div>
 

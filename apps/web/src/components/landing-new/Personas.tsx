@@ -6,18 +6,18 @@ import { Home, TrendingUp, Headphones } from 'lucide-react';
 
 const personas = [
   {
-    role: "The Salesman",
-    prompt: "Agisci come un venditore esperto. Usa tecniche di persuasione eleganti, sii assertivo ma cortese.",
-    icon: <TrendingUp />,
+    role: "Supporto Post-Vendita",
+    prompt: "Manuali di macchinari, schede tecniche, procedure di manutenzione. Risposte immediate ai clienti.",
+    icon: <Headphones />,
     image: {
-      src: "/landing-new/personas/salesman.png",
-      fallback: "/landing-new/personas/salesman.svg",
+      src: "/landing-new/personas/customer-success.png",
+      fallback: "/landing-new/personas/customer-success.svg",
     },
-    color: "from-blue-400 to-blue-600"
+    color: "from-purple-400 to-purple-600"
   },
   {
-    role: "Real Estate Agent",
-    prompt: "Sei un agente immobiliare di lusso. Descrivi le proprietà con un linguaggio evocativo e dettagliato.",
+    role: "Assistenza Tecnica Interna",
+    prompt: "Procedure operative, documentazione di sicurezza, FAQ tecniche. I tecnici trovano le risposte senza interrompere.",
     icon: <Home />,
     image: {
       src: "/landing-new/personas/real-estate.png",
@@ -26,14 +26,14 @@ const personas = [
     color: "from-emerald-400 to-emerald-600"
   },
   {
-    role: "Customer Success",
-    prompt: "Sei un assistente empatico. Risolvi problemi tecnici mantenendo un tono calmo e rassicurante.",
-    icon: <Headphones />,
+    role: "Onboarding Nuovi Assunti",
+    prompt: "Policy aziendali, manuali operativi, procedure standard. Formazione autonoma dal primo giorno.",
+    icon: <TrendingUp />,
     image: {
-      src: "/landing-new/personas/customer-success.png",
-      fallback: "/landing-new/personas/customer-success.svg",
+      src: "/landing-new/personas/salesman.png",
+      fallback: "/landing-new/personas/salesman.svg",
     },
-    color: "from-purple-400 to-purple-600"
+    color: "from-blue-400 to-blue-600"
   }
 ];
 
@@ -120,11 +120,11 @@ export const Personas: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             className="font-serif text-4xl md:text-6xl text-white mb-6"
           >
-            I MILLE VOLTI <br/>
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-platinum-200 via-white to-platinum-400 animate-pulse">DELL&apos;INTELLIGENZA</span>
+            PROGETTATO PER <br/>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-platinum-200 via-white to-platinum-400">AMBIENTI TECNICI</span>
           </motion.h2>
           <p className="text-platinum-400 max-w-2xl mx-auto">
-            Definisci il ruolo. I nostri androidi virtuali si adatteranno perfettamente al contesto.
+            Manifatturiero, impiantistica, automazione industriale, OEM, manutenzione, facility management.
           </p>
         </div>
 
