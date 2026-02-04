@@ -7,20 +7,20 @@ import { FileText, Database, Zap } from 'lucide-react';
 const steps = [
   {
     id: "01",
-    title: "Carica la Documentazione",
-    desc: "PDF, Word, Excel, testi. Il sistema accetta i formati che già usi. Non serve riscrivere nulla.",
+    title: "Carica i tuoi documenti",
+    desc: "PDF, Word, Excel. I manuali che hai già. Nessuna riscrittura, nessun formato speciale.",
     icon: <FileText />
   },
   {
     id: "02",
-    title: "Il Sistema Indicizza",
-    desc: "I contenuti vengono elaborati e resi interrogabili. Ogni risposta cita la fonte originale.",
+    title: "Il sistema li indicizza",
+    desc: "In ore, non settimane. Ogni risposta include il riferimento al documento originale.",
     icon: <Database />
   },
   {
     id: "03",
-    title: "Gli Utenti Interrogano",
-    desc: "Via web, widget integrato, o canali come WhatsApp. Risposte immediate, 24/7, senza intervento umano.",
+    title: "Gli utenti fanno domande",
+    desc: "In linguaggio naturale. Via web, widget, WhatsApp. Risposte in secondi, 24/7.",
     icon: <Zap />
   }
 ];
@@ -42,10 +42,10 @@ export const Training: React.FC = () => {
             viewport={{ once: true }}
             className="font-serif text-4xl md:text-5xl text-white mb-6"
           >
-            Operativo in <span className="text-platinum-400 italic">3 Passaggi</span>
+            Come funziona
           </motion.h2>
           <p className="text-platinum-500 max-w-2xl mx-auto">
-            Nessun setup complesso. Carica i documenti, il sistema li elabora, gli utenti trovano le risposte.
+            Nessun progetto IT. Nessuna integrazione complessa. Tre passaggi e sei operativo.
           </p>
         </div>
 

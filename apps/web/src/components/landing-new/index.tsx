@@ -10,6 +10,7 @@ import { Personas } from './Personas';
 import { Training } from './Training';
 import { PricingV2 } from './PricingV2';
 import { About } from './About';
+import { CasoUso } from './CasoUso';
 import { Footer } from './Footer';
 
 const LandingPage: React.FC = () => {
@@ -47,9 +48,10 @@ const LandingPage: React.FC = () => {
           <Hero />
           <Integrations />
           <About />
-          <Personas />
-          <Services />
           <Training />
+          <Services />
+          <Personas />
+          <CasoUso />
           <PricingV2 />
         </main>
         <Footer />

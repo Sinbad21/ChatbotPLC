@@ -105,11 +105,11 @@ export const PricingV2: React.FC = () => {
         {/* Header */}
         <div className="text-center mb-16">
           <h2 className="font-serif text-4xl md:text-5xl text-white mb-4">
-            Il prezzo dipende dal valore che generi
+            Costo proporzionato al risparmio generato
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-transparent via-platinum-400 to-transparent mx-auto mb-6" />
           <p className="text-platinum-400 max-w-2xl mx-auto">
-            Non vendiamo "posti" o "messaggi". Dimensioniamo la soluzione sul volume documentale e sul risparmio atteso.
+            Niente "posti utente" o "crediti messaggi". Il dimensionamento dipende dal volume documentale e dal risparmio atteso.
           </p>
         </div>
 

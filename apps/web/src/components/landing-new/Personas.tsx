@@ -6,8 +6,8 @@ import { Home, TrendingUp, Headphones } from 'lucide-react';
 
 const personas = [
   {
-    role: "Supporto Post-Vendita",
-    prompt: "Manuali di macchinari, schede tecniche, procedure di manutenzione. Risposte immediate ai clienti.",
+    role: "Service Manager",
+    prompt: "Riduce i ticket di primo livello del 70%. I clienti trovano le risposte sui manuali senza aprire richieste.",
     icon: <Headphones />,
     image: {
       src: "/landing-new/personas/customer-success.png",
@@ -16,8 +16,8 @@ const personas = [
     color: "from-purple-400 to-purple-600"
   },
   {
-    role: "Assistenza Tecnica Interna",
-    prompt: "Procedure operative, documentazione di sicurezza, FAQ tecniche. I tecnici trovano le risposte senza interrompere.",
+    role: "Responsabile Ufficio Tecnico",
+    prompt: "I tecnici sul campo consultano il sistema invece di chiamare. Le interruzioni calano dell'80%.",
     icon: <Home />,
     image: {
       src: "/landing-new/personas/real-estate.png",
@@ -26,8 +26,8 @@ const personas = [
     color: "from-emerald-400 to-emerald-600"
   },
   {
-    role: "Onboarding Nuovi Assunti",
-    prompt: "Policy aziendali, manuali operativi, procedure standard. Formazione autonoma dal primo giorno.",
+    role: "HR / Operations Manager",
+    prompt: "Nuovi assunti operativi in giorni, non settimane. La documentazione diventa strumento di formazione continua.",
     icon: <TrendingUp />,
     image: {
       src: "/landing-new/personas/salesman.png",
@@ -120,11 +120,10 @@ export const Personas: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             className="font-serif text-4xl md:text-6xl text-white mb-6"
           >
-            PROGETTATO PER <br/>
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-platinum-200 via-white to-platinum-400">AMBIENTI TECNICI</span>
+            Chi lo usa in azienda
           </motion.h2>
           <p className="text-platinum-400 max-w-2xl mx-auto">
-            Manifatturiero, impiantistica, automazione industriale, OEM, manutenzione, facility management.
+            Tre scenari tipici. Stesso obiettivo: meno tempo perso, più autonomia operativa.
           </p>
         </div>
 

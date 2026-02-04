@@ -48,21 +48,21 @@ export const About: React.FC = () => {
               Il Problema
             </h3>
             <h2 className="font-serif text-4xl md:text-5xl text-white mb-6 leading-tight">
-              Il costo nascosto della <br/>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-platinum-300 to-platinum-600">documentazione inutilizzata</span>
+              La documentazione esiste. <br/>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-platinum-300 to-platinum-600">Nessuno la usa.</span>
             </h2>
             <p className="text-platinum-400 mb-6 leading-relaxed">
-              Hai manuali, schede tecniche, procedure operative. Nessuno le legge. Il supporto tecnico risponde sempre alle stesse domande. I tecnici sul campo chiamano invece di consultare i PDF.
+              Manuali, schede tecniche, procedure. Tutto archiviato, niente consultato. Il supporto risponde alle stesse domande. I tecnici chiamano invece di cercare.
             </p>
             <p className="text-platinum-400 mb-8 leading-relaxed">
-              Nuovi assunti impiegano settimane a orientarsi. I clienti aprono ticket che potrebbero risolvere da soli. Ogni interruzione costa tempo. Ogni ticket ripetuto è denaro perso.
+              Ogni interruzione costa 45 minuti. Ogni ticket ripetuto costa €15-30. Ogni nuovo assunto impiega settimane a orientarsi. È un costo invisibile, ma reale.
             </p>
 
             <div className="flex flex-col gap-4">
               {[
-                { icon: <Network size={20} />, text: "Ticket ripetitivi al supporto" },
-                { icon: <Cpu size={20} />, text: "Personale tecnico interrotto" },
-                { icon: <Lock size={20} />, text: "Onboarding lento e costoso" }
+                { icon: <Network size={20} />, text: "70% dei ticket risolvibili da documentazione" },
+                { icon: <Cpu size={20} />, text: "15+ interruzioni al giorno per l'ufficio tecnico" },
+                { icon: <Lock size={20} />, text: "3 settimane per rendere operativo un nuovo assunto" }
               ].map((item, idx) => (
                 <div key={idx} className="flex items-center gap-4 p-3 border-b border-platinum-900 hover:border-platinum-700 transition-colors group cursor-default">
                   <span className="text-platinum-600 group-hover:text-platinum-200 transition-colors">{item.icon}</span>

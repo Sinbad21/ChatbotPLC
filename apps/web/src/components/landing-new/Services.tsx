@@ -7,23 +7,23 @@ import { MessageSquareCode, BrainCircuit, Zap, Globe2 } from 'lucide-react';
 const services = [
   {
     icon: <MessageSquareCode className="w-8 h-8" />,
-    title: "Meno Ticket al Supporto",
-    desc: "Le domande frequenti vengono risolte automaticamente. Il team si concentra sui casi complessi."
+    title: "Riduzione ticket L1: -70%",
+    desc: "Le domande ripetitive vengono risolte automaticamente. Il supporto si occupa solo dei casi che richiedono competenza."
   },
   {
     icon: <BrainCircuit className="w-8 h-8" />,
-    title: "Meno Interruzioni",
-    desc: "I tecnici sul campo consultano il sistema invece di chiamare. Chi lavora, lavora."
+    title: "Interruzioni: -80%",
+    desc: "I tecnici consultano il sistema invece di chiamare l'ufficio. Chi lavora, lavora senza fermarsi."
   },
   {
     icon: <Zap className="w-8 h-8" />,
-    title: "Onboarding Veloce",
-    desc: "I nuovi assunti interrogano la documentazione dal primo giorno. Meno affiancamento, meno errori."
+    title: "Onboarding: da 3 settimane a 3 giorni",
+    desc: "I nuovi assunti trovano risposte dal primo giorno. Meno affiancamento, meno errori, meno tempo perso."
   },
   {
     icon: <Globe2 className="w-8 h-8" />,
-    title: "Supporto 24/7",
-    desc: "Clienti e collaboratori ottengono risposte anche fuori orario. Nessuna assunzione aggiuntiva."
+    title: "Supporto 24/7 a costo zero",
+    desc: "Clienti e collaboratori ottengono risposte fuori orario. Senza turni notturni, senza assunzioni."
   }
 ];
 
@@ -44,10 +44,10 @@ export const Services: React.FC = () => {
           viewport={{ once: true }}
           className="text-center mb-20"
         >
-          <h2 className="font-serif text-4xl md:text-5xl text-white mb-4">Benefici Concreti</h2>
+          <h2 className="font-serif text-4xl md:text-5xl text-white mb-4">Cosa cambia in azienda</h2>
           <div className="w-24 h-1 bg-gradient-to-r from-platinum-900 via-platinum-400 to-platinum-900 mx-auto rounded-full" />
           <p className="mt-6 text-platinum-400 max-w-2xl mx-auto">
-            Risultati misurabili, non promesse. Ogni funzionalità riduce tempo, costi o rischio operativo.
+            Numeri reali, non promesse. Ogni risultato è misurabile e verificabile.
           </p>
         </motion.div>
 
