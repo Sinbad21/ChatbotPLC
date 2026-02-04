@@ -528,7 +528,7 @@ export const Hero: React.FC = () => {
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
               <Sparkles className="w-3 h-3 text-platinum-300 animate-pulse" />
               <span className="text-platinum-300 text-xs uppercase tracking-[0.2em] font-medium">
-                Supporto Tecnico su Documentazione Aziendale
+                Supporto tecnico su documentazione aziendale
               </span>
             </div>
           </motion.div>
@@ -540,9 +540,9 @@ export const Hero: React.FC = () => {
             className="mb-6"
           >
             <h1 className="font-sans text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-platinum-50 via-platinum-200 to-platinum-500 leading-[1.05]">
-              I tuoi manuali <br />
+              Trasforma la documentazione <br />
               <span className="relative inline-block">
-                rispondono. 24/7.
+                in risparmio operativo.
               </span>
             </h1>
           </motion.div>
@@ -553,7 +553,9 @@ export const Hero: React.FC = () => {
             transition={{ duration: 0.8, delay: 0.5 }}
             className="max-w-xl mx-auto lg:mx-0 text-platinum-400 text-base sm:text-lg font-light leading-relaxed mb-8 sm:mb-10"
           >
-            Riduci i ticket ripetitivi del 70%. Il tuo personale tecnico smette di essere interrotto. I clienti trovano le risposte da soli, direttamente dalla tua documentazione.
+            Meno ticket di primo livello.<br />
+            Meno interruzioni al personale tecnico.<br />
+            Supporto continuo, senza assumere nuove risorse.
           </motion.p>
 
           <motion.div
@@ -568,8 +570,7 @@ export const Hero: React.FC = () => {
             >
               <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/80 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out"></span>
               <span className="relative flex items-center justify-center gap-2 z-10">
-                <Bot className="w-4 h-4" />
-                Richiedi una Demo
+                Richiedi una valutazione
               </span>
             </Link>
             <a
@@ -578,7 +579,7 @@ export const Hero: React.FC = () => {
             >
               <span className="absolute inset-0 w-full h-full bg-platinum-800/0 group-hover:bg-platinum-800/40 transition-colors duration-300"></span>
               <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out"></span>
-              <span className="relative z-10">Vedi Come Funziona</span>
+              <span className="relative z-10">Vedi come funziona</span>
             </a>
           </motion.div>
         </div>
@@ -645,23 +646,22 @@ export const Hero: React.FC = () => {
         className="z-10 container mx-auto px-4 sm:px-6 mt-16 md:mt-24"
       >
         <div className="border-t border-platinum-800/50 pt-10">
-          <p className="text-xs text-platinum-500 uppercase tracking-[0.2em] text-center mb-8">Risultati Misurabili</p>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 max-w-3xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 max-w-4xl mx-auto">
             <div className="text-center">
               <div className="text-3xl md:text-4xl font-serif font-bold text-platinum-100 mb-1">-70%</div>
-              <div className="text-xs text-platinum-500 uppercase tracking-wide">Ticket Ripetitivi</div>
+              <div className="text-xs text-platinum-500 uppercase tracking-wide">Riduzione ticket L1</div>
             </div>
             <div className="text-center">
               <div className="text-3xl md:text-4xl font-serif font-bold text-platinum-100 mb-1">&lt;3s</div>
-              <div className="text-xs text-platinum-500 uppercase tracking-wide">Tempo Risposta</div>
+              <div className="text-xs text-platinum-500 uppercase tracking-wide">Risposte</div>
             </div>
             <div className="text-center">
               <div className="text-3xl md:text-4xl font-serif font-bold text-platinum-100 mb-1">24/7</div>
-              <div className="text-xs text-platinum-500 uppercase tracking-wide">Senza Personale Extra</div>
+              <div className="text-xs text-platinum-500 uppercase tracking-wide">Senza personale aggiuntivo</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl md:text-4xl font-serif font-bold text-platinum-100 mb-1">0</div>
-              <div className="text-xs text-platinum-500 uppercase tracking-wide">Formazione Richiesta</div>
+              <div className="text-3xl md:text-4xl font-serif font-bold text-platinum-100 mb-1">3–6</div>
+              <div className="text-xs text-platinum-500 uppercase tracking-wide">Mesi payback tipico</div>
             </div>
           </div>
         </div>
