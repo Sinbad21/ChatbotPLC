@@ -22,8 +22,8 @@ export const CasoUso: React.FC = () => {
               <span className="w-8 h-[1px] bg-platinum-500"></span>
             </h3>
             <h2 className="font-serif text-4xl md:text-5xl text-white mb-6">
-              Azienda manifatturiera, <br/>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 to-emerald-500">45 tecnici sul campo</span>
+              Software house PLC, <br/>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 to-emerald-500">18 programmatori, 200+ clienti attivi</span>
             </h2>
           </motion.div>
         </div>
@@ -45,11 +45,11 @@ export const CasoUso: React.FC = () => {
             
             <ul className="space-y-4">
               {[
-                "120+ manuali PDF distribuiti su cartelle condivise",
-                "Ufficio tecnico interrotto 15-20 volte al giorno",
-                "Tempo medio per trovare un'informazione: 12 minuti",
-                "Nuovi assunti operativi dopo 3 settimane",
-                "Clienti in attesa per domande già documentate"
+                "Documentazione tecnica sparsa tra Wiki, PDF e note interne",
+                "Supporto clienti interrotto 25+ volte al giorno per domande su configurazioni",
+                "Tempo medio per rispondere a un ticket tecnico: 18 minuti",
+                "Nuovi sviluppatori produttivi dopo 4-5 settimane",
+                "Clienti bloccati in attesa di risposte su parametri e funzioni"
               ].map((item, idx) => (
                 <li key={idx} className="flex items-start gap-3 text-platinum-400">
                   <span className="text-red-400 mt-1">×</span>
@@ -75,11 +75,11 @@ export const CasoUso: React.FC = () => {
             
             <ul className="space-y-4">
               {[
-                "Documentazione indicizzata e interrogabile in linguaggio naturale",
-                "Interruzioni ridotte a 3-4 al giorno (solo casi complessi)",
-                "Risposta media: 2.8 secondi con riferimento alla fonte",
-                "Nuovi assunti autonomi dalla prima settimana",
-                "Clienti serviti 24/7 senza personale aggiuntivo"
+                "Tutta la documentazione PLC indicizzata e interrogabile in linguaggio naturale",
+                "Interruzioni ridotte a 5-6 al giorno (solo casi di sviluppo custom)",
+                "Risposta media: 3.2 secondi con link al codice o manuale originale",
+                "Nuovi sviluppatori autonomi dalla seconda settimana",
+                "Clienti self-service 24/7 su parametri, errori e configurazioni"
               ].map((item, idx) => (
                 <li key={idx} className="flex items-start gap-3 text-platinum-300">
                   <span className="text-emerald-400 mt-1">✓</span>
@@ -103,28 +103,28 @@ export const CasoUso: React.FC = () => {
               <div>
                 <div className="flex items-center justify-center gap-2 mb-2">
                   <TrendingDown className="w-5 h-5 text-emerald-400" />
-                  <span className="text-3xl font-bold text-white">-68%</span>
+                  <span className="text-3xl font-bold text-white">-72%</span>
                 </div>
                 <div className="text-platinum-500 text-sm">Ticket al supporto</div>
               </div>
               <div>
                 <div className="flex items-center justify-center gap-2 mb-2">
                   <Clock className="w-5 h-5 text-emerald-400" />
-                  <span className="text-3xl font-bold text-white">42h</span>
+                  <span className="text-3xl font-bold text-white">38h</span>
                 </div>
                 <div className="text-platinum-500 text-sm">Risparmiate / settimana</div>
               </div>
               <div>
                 <div className="flex items-center justify-center gap-2 mb-2">
                   <Users className="w-5 h-5 text-emerald-400" />
-                  <span className="text-3xl font-bold text-white">-80%</span>
+                  <span className="text-3xl font-bold text-white">-75%</span>
                 </div>
-                <div className="text-platinum-500 text-sm">Tempo onboarding</div>
+                <div className="text-platinum-500 text-sm">Tempo onboarding dev</div>
               </div>
               <div>
                 <div className="flex items-center justify-center gap-2 mb-2">
                   <Factory className="w-5 h-5 text-emerald-400" />
-                  <span className="text-3xl font-bold text-white">4 mesi</span>
+                  <span className="text-3xl font-bold text-white">3 mesi</span>
                 </div>
                 <div className="text-platinum-500 text-sm">Payback raggiunto</div>
               </div>
@@ -142,13 +142,13 @@ export const CasoUso: React.FC = () => {
           <p className="text-platinum-600 text-sm mb-4">Applicabile a:</p>
           <div className="flex flex-wrap justify-center gap-4 text-xs text-platinum-500">
             {[
-              "Automazione industriale",
-              "Impiantistica",
+              "Software house PLC/SCADA",
+              "System integrator",
               "OEM macchinari",
-              "Facility management",
-              "Manutenzione predittiva",
-              "Produzione",
-              "Service post-vendita"
+              "Automazione industriale",
+              "Building automation",
+              "Assistenza tecnica",
+              "Sviluppo firmware"
             ].map((sector, idx) => (
               <span key={idx} className="px-3 py-1 border border-platinum-800 rounded-full">
                 {sector}
