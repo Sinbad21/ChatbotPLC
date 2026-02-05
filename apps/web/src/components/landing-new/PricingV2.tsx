@@ -96,10 +96,8 @@ const plans: Plan[] = [
 
 export const PricingV2: React.FC = () => {
   return (
-    <section id="prezzi" className="py-20 md:py-32 bg-platinum-950 relative overflow-hidden">
+    <section id="prezzi" className="py-20 md:py-32 bg-platinum-950 relative overflow-hidden border-t border-platinum-900">
       <span id="pricing" aria-hidden="true" />
-
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-platinum-400/5 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
         {/* Header */}
@@ -107,7 +105,7 @@ export const PricingV2: React.FC = () => {
           <h2 className="font-serif text-4xl md:text-5xl text-white mb-4">
             Costo proporzionato al risparmio generato
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-transparent via-platinum-400 to-transparent mx-auto mb-6" />
+          <div className="w-24 h-[1px] bg-platinum-700 mx-auto mb-6" />
           <p className="text-platinum-400 max-w-2xl mx-auto">
             Niente "posti utente" o "crediti messaggi". Il dimensionamento dipende dal volume documentale e dal risparmio atteso.
           </p>
@@ -115,7 +113,7 @@ export const PricingV2: React.FC = () => {
 
         {/* ROI Reference */}
         <div className="max-w-4xl mx-auto mb-16">
-          <div className="bg-platinum-900/40 border border-platinum-800 rounded-lg p-8">
+          <div className="bg-platinum-900 border border-platinum-800 rounded-lg p-8">
             <h3 className="text-lg font-bold text-white mb-6 text-center">Come calcoliamo il ROI</h3>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6 text-center">
               <div>
@@ -143,17 +141,17 @@ export const PricingV2: React.FC = () => {
           {plans.map((plan, index) => (
             <motion.div
               key={plan.id}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.08 }}
-              className={`relative p-6 rounded-lg border transition-all duration-500 group hover:-translate-y-2 ${
+              transition={{ delay: index * 0.05, duration: 0.2 }}
+              className={`relative p-6 rounded-lg border transition-colors duration-150 ${
                 plan.highlight
-                  ? 'bg-gradient-to-b from-platinum-800/40 to-platinum-900/40 border-platinum-400/50 shadow-[0_0_50px_rgba(156,163,175,0.1)]'
-                  : 'bg-platinum-900/20 border-platinum-800 hover:border-platinum-600'
+                  ? 'bg-platinum-900 border-platinum-500'
+                  : 'bg-platinum-900 border-platinum-800 hover:border-platinum-600'
               }`}
             >
               {plan.highlight && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-emerald-500 text-white px-3 py-1 rounded-full text-xs font-bold tracking-wide uppercase shadow-lg">
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-emerald-600 text-white px-3 py-1 rounded-sm text-xs font-bold tracking-wide uppercase">
                   Più scelto
                 </div>
               )}
@@ -202,10 +200,10 @@ export const PricingV2: React.FC = () => {
               {/* CTA */}
               <Link
                 href="/contact"
-                className={`flex items-center justify-center gap-2 w-full py-3 rounded-sm text-sm font-bold uppercase tracking-widest transition-all duration-300 ${
+                className={`flex items-center justify-center gap-2 w-full py-3 rounded-sm text-sm font-bold uppercase tracking-widest transition-colors duration-150 ${
                   plan.highlight
-                    ? 'bg-platinum-100 text-black hover:bg-white hover:shadow-[0_0_30px_rgba(255,255,255,0.6)]'
-                    : 'border border-platinum-700 text-platinum-300 hover:border-platinum-400 hover:text-white'
+                    ? 'bg-platinum-100 text-black hover:bg-white'
+                    : 'border border-platinum-700 text-platinum-300 hover:border-platinum-500 hover:text-white'
                 }`}
               >
                 Richiedi Valutazione

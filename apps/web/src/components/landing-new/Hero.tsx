@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-  ArrowDown, Sparkles, Bot, Briefcase, Home, Headphones, RefreshCw,
+  ArrowDown, Briefcase, Home, Headphones, RefreshCw,
   ChevronRight, ChevronLeft, BarChart3, Calendar, Users, Download, Filter,
   CheckCircle, Clock, PieChart
 } from 'lucide-react';
@@ -521,12 +521,10 @@ export const Hero: React.FC = () => {
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
+            transition={{ duration: 0.3 }}
             className="flex items-center justify-center lg:justify-start gap-2 mb-6"
           >
-            <div className="relative overflow-hidden group bg-platinum-900/50 border border-platinum-700 rounded-full px-4 py-1.5 backdrop-blur-sm inline-flex items-center gap-2">
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
-              <Sparkles className="w-3 h-3 text-platinum-300 animate-pulse" />
+            <div className="bg-platinum-900 border border-platinum-700 rounded-sm px-4 py-1.5 inline-flex items-center gap-2">
               <span className="text-platinum-300 text-xs uppercase tracking-[0.2em] font-medium">
                 Supporto tecnico su documentazione aziendale
               </span>
@@ -536,12 +534,12 @@ export const Hero: React.FC = () => {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
+            transition={{ duration: 0.3, delay: 0.1 }}
             className="mb-6"
           >
-            <h1 className="font-sans text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-platinum-50 via-platinum-200 to-platinum-500 leading-[1.05]">
+            <h1 className="font-sans text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.05]">
               Trasforma la documentazione <br />
-              <span className="relative inline-block">
+              <span className="text-platinum-400">
                 in risparmio operativo.
               </span>
             </h1>
@@ -550,7 +548,7 @@ export const Hero: React.FC = () => {
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
+            transition={{ duration: 0.3, delay: 0.2 }}
             className="max-w-xl mx-auto lg:mx-0 text-platinum-400 text-base sm:text-lg font-light leading-relaxed mb-8 sm:mb-10"
           >
             Meno ticket di primo livello.<br />
@@ -561,53 +559,42 @@ export const Hero: React.FC = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.7 }}
+            transition={{ duration: 0.3, delay: 0.3 }}
             className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4"
           >
             <Link
               href="/contact"
-              className="relative px-8 py-3 bg-platinum-100 text-platinum-950 font-bold tracking-widest uppercase text-sm overflow-hidden group rounded-sm hover:shadow-[0_0_30px_rgba(255,255,255,0.5)] transition-all duration-300 active:scale-95 transform text-center"
+              className="px-8 py-3 bg-platinum-100 text-platinum-950 font-bold tracking-widest uppercase text-sm rounded-sm hover:bg-white transition-colors duration-150 text-center"
             >
-              <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/80 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out"></span>
-              <span className="relative flex items-center justify-center gap-2 z-10">
-                Richiedi una valutazione
-              </span>
+              Richiedi una valutazione
             </Link>
             <a
               href="#come-funziona"
-              className="relative px-8 py-3 border border-platinum-700 text-platinum-300 font-medium tracking-widest uppercase text-sm transition-all duration-300 rounded-sm backdrop-blur-sm group overflow-hidden hover:text-white hover:border-platinum-400 hover:shadow-[0_0_20px_rgba(255,255,255,0.2)] active:scale-95 transform text-center"
+              className="px-8 py-3 border border-platinum-600 text-platinum-300 font-medium tracking-widest uppercase text-sm rounded-sm hover:bg-platinum-900 hover:text-white hover:border-platinum-500 transition-colors duration-150 text-center"
             >
-              <span className="absolute inset-0 w-full h-full bg-platinum-800/0 group-hover:bg-platinum-800/40 transition-colors duration-300"></span>
-              <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out"></span>
-              <span className="relative z-10">Vedi come funziona</span>
+              Vedi come funziona
             </a>
           </motion.div>
         </div>
 
         <motion.div
-          initial={{ opacity: 0, x: 30, rotateY: 0, rotateX: 0 }}
-          animate={{ opacity: 1, x: 0, rotateY: -15, rotateX: 8 }}
-          transition={{ duration: 1, delay: 0.4 }}
-          className="relative w-full max-w-sm sm:max-w-md mx-auto lg:mr-0 group/slider"
-          style={{ transformStyle: 'preserve-3d', perspective: '1500px' }}
+          initial={{ opacity: 0, x: 30 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.3, delay: 0.2 }}
+          className="relative w-full max-w-sm sm:max-w-md mx-auto lg:mr-0"
         >
-          <div className="absolute top-1/2 -left-12 -translate-y-1/2 z-30 opacity-50 hover:opacity-100 transition-opacity cursor-pointer hidden lg:block" onClick={prevSlide}>
-            <div className="p-2 rounded-full bg-platinum-900 border border-platinum-700 hover:bg-platinum-800 shadow-[0_0_15px_rgba(0,0,0,0.5)]">
+          <div className="absolute top-1/2 -left-12 -translate-y-1/2 z-30 opacity-50 hover:opacity-100 transition-opacity duration-150 cursor-pointer hidden lg:block" onClick={prevSlide}>
+            <div className="p-2 rounded-sm bg-platinum-900 border border-platinum-700 hover:bg-platinum-800">
               <ChevronLeft className="text-platinum-200" />
             </div>
           </div>
-          <div className="absolute top-1/2 -right-12 -translate-y-1/2 z-30 opacity-50 hover:opacity-100 transition-opacity cursor-pointer hidden lg:block" onClick={nextSlide}>
-            <div className="p-2 rounded-full bg-platinum-900 border border-platinum-700 hover:bg-platinum-800 shadow-[0_0_15px_rgba(0,0,0,0.5)]">
+          <div className="absolute top-1/2 -right-12 -translate-y-1/2 z-30 opacity-50 hover:opacity-100 transition-opacity duration-150 cursor-pointer hidden lg:block" onClick={nextSlide}>
+            <div className="p-2 rounded-sm bg-platinum-900 border border-platinum-700 hover:bg-platinum-800">
               <ChevronRight className="text-platinum-200" />
             </div>
           </div>
 
-          <div className={`absolute inset-0 rounded-2xl blur-[60px] opacity-50 transition-colors duration-700 ${activeSlide === 0 ? 'bg-blue-500/30' :
-            activeSlide === 1 ? 'bg-emerald-500/30' :
-              activeSlide === 2 ? 'bg-purple-500/30' : 'bg-amber-500/30'
-            }`} />
-
-          <div className="relative bg-platinum-950/90 backdrop-blur-xl border-t border-l border-platinum-700/50 p-0 rounded-2xl flex flex-col h-[420px] sm:h-[500px] overflow-hidden border-r-[8px] border-b-[8px] border-r-platinum-900 border-b-platinum-900 shadow-[20px_30px_60px_rgba(0,0,0,0.9)]">
+          <div className="relative bg-platinum-900 border border-platinum-700 p-0 rounded-xl flex flex-col h-[420px] sm:h-[500px] overflow-hidden shadow-lg">
 
             <AnimatePresence mode='wait'>
               <motion.div
@@ -642,7 +629,7 @@ export const Hero: React.FC = () => {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 1 }}
+        transition={{ duration: 0.3, delay: 0.4 }}
         className="z-10 container mx-auto px-4 sm:px-6 mt-16 md:mt-24"
       >
         <div className="border-t border-platinum-800/50 pt-10">
@@ -667,14 +654,12 @@ export const Hero: React.FC = () => {
         </div>
       </motion.div>
 
-      <motion.div
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 text-platinum-500 hidden md:block cursor-pointer z-20"
-        animate={{ y: [0, 10, 0] }}
-        transition={{ duration: 2, repeat: Infinity }}
+      <div
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 text-platinum-500 hidden md:block cursor-pointer z-20 hover:text-platinum-300 transition-colors duration-150"
         onClick={() => document.getElementById('chi-siamo')?.scrollIntoView({ behavior: 'smooth' })}
       >
-        <ArrowDown className="w-6 h-6 opacity-50 hover:opacity-100 transition-opacity" />
-      </motion.div>
+        <ArrowDown className="w-6 h-6" />
+      </div>
     </section>
   );
 };

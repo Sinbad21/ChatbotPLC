@@ -2,12 +2,11 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Diamond, Twitter, Linkedin, Bot } from 'lucide-react';
+import { Diamond, Twitter, Linkedin } from 'lucide-react';
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="bg-black text-platinum-300 border-t border-platinum-900 pt-20 pb-8 relative overflow-hidden">
-       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[50%] h-1 bg-gradient-to-r from-transparent via-platinum-800 to-transparent opacity-50" />
+    <footer className="bg-platinum-950 text-platinum-300 border-t border-platinum-800 pt-20 pb-8 relative overflow-hidden">
 
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
@@ -24,14 +23,11 @@ export const Footer: React.FC = () => {
               Riduci ticket, interruzioni e tempi di formazione.
             </p>
             <div className="flex gap-4">
-              <a href="#" className="w-8 h-8 rounded-full bg-platinum-900 flex items-center justify-center text-platinum-400 hover:bg-platinum-100 hover:text-black transition-all duration-300 hover:scale-110 active:scale-95">
+              <a href="#" className="w-8 h-8 rounded-sm bg-platinum-900 flex items-center justify-center text-platinum-400 hover:bg-platinum-800 hover:text-white transition-colors duration-150 border border-platinum-800">
                 <Twitter className="w-4 h-4" />
               </a>
-              <a href="#" className="w-8 h-8 rounded-full bg-platinum-900 flex items-center justify-center text-platinum-400 hover:bg-platinum-100 hover:text-black transition-all duration-300 hover:scale-110 active:scale-95">
+              <a href="#" className="w-8 h-8 rounded-sm bg-platinum-900 flex items-center justify-center text-platinum-400 hover:bg-platinum-800 hover:text-white transition-colors duration-150 border border-platinum-800">
                 <Linkedin className="w-4 h-4" />
-              </a>
-              <a href="#" className="w-8 h-8 rounded-full bg-platinum-900 flex items-center justify-center text-platinum-400 hover:bg-platinum-100 hover:text-black transition-all duration-300 hover:scale-110 active:scale-95">
-                <Bot className="w-4 h-4" />
               </a>
             </div>
           </div>
@@ -73,7 +69,7 @@ export const Footer: React.FC = () => {
                   className="w-full bg-platinum-900/50 border border-platinum-800 text-white px-4 py-3 text-sm focus:outline-none focus:border-platinum-400 transition-colors rounded-sm"
                 />
               </div>
-              <button className="w-full bg-platinum-200 text-platinum-950 px-4 py-3 text-xs font-bold uppercase tracking-widest hover:bg-white hover:shadow-[0_0_20px_rgba(255,255,255,0.5)] transition-all duration-300 rounded-sm active:scale-95">
+              <button className="w-full bg-platinum-200 text-platinum-950 px-4 py-3 text-xs font-bold uppercase tracking-widest hover:bg-white transition-colors duration-150 rounded-sm">
                 Richiedi valutazione
               </button>
             </div>

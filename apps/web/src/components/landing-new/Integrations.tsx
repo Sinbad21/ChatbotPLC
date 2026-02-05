@@ -31,13 +31,13 @@ export const Integrations: React.FC = () => {
           transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
         >
           {integrations.map((item, idx) => (
-            <div key={idx} className="flex items-center gap-3 opacity-50 hover:opacity-100 transition-opacity duration-300 cursor-default group">
-              <div className="p-3 rounded-full bg-platinum-900 border border-platinum-800 text-platinum-400 group-hover:text-platinum-100 group-hover:border-platinum-500 group-hover:shadow-[0_0_15px_rgba(255,255,255,0.3)] transition-all">
+            <div key={idx} className="flex items-center gap-3 opacity-50 hover:opacity-100 transition-opacity duration-150 cursor-default group">
+              <div className="p-3 rounded-lg bg-platinum-900 border border-platinum-800 text-platinum-400 group-hover:text-platinum-200 group-hover:border-platinum-600 transition-colors duration-150">
                 {item.icon}
               </div>
               <span className="text-lg font-serif text-platinum-300 tracking-wider uppercase">{item.name}</span>
             </div>
-          ))}
+          ))})
         </motion.div>
       </div>
     </section>

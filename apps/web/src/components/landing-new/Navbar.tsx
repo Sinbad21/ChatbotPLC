@@ -20,9 +20,9 @@ export const Navbar: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navClasses = `fixed top-0 left-0 right-0 z-50 transition-all duration-500 cubic-bezier(0.4, 0, 0.2, 1) ${
+  const navClasses = `fixed top-0 left-0 right-0 z-50 transition-colors duration-150 ${
     isScrolled
-      ? 'bg-platinum-950/80 backdrop-blur-md border-b border-platinum-800 py-4'
+      ? 'bg-platinum-950 border-b border-platinum-800 py-4'
       : 'bg-transparent py-6'
   }`;
 
@@ -85,10 +85,9 @@ export const Navbar: React.FC = () => {
 
           <Link
             href="/auth/login"
-            className="relative group px-6 py-2 border border-platinum-400 text-platinum-100 hover:text-platinum-900 transition-all duration-300 rounded-sm uppercase text-xs tracking-widest font-bold overflow-hidden bg-transparent hover:bg-platinum-100 active:scale-95 hover:shadow-[0_0_25px_rgba(255,255,255,0.4)]"
+            className="px-6 py-2 border border-platinum-400 text-platinum-100 hover:text-platinum-900 hover:bg-platinum-100 transition-colors duration-150 rounded-sm uppercase text-xs tracking-widest font-bold"
           >
-            <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/50 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out"></span>
-            <span className="relative z-10">Accedi</span>
+            Accedi
           </Link>
         </div>
 

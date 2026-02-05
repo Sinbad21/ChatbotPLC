@@ -7,7 +7,6 @@ import { Factory, Clock, TrendingDown, Users, CheckCircle } from 'lucide-react';
 export const CasoUso: React.FC = () => {
   return (
     <section id="caso-uso" className="py-24 bg-platinum-950 relative overflow-hidden border-t border-platinum-900">
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-emerald-500/5 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
         <div className="text-center mb-16">
@@ -23,7 +22,7 @@ export const CasoUso: React.FC = () => {
             </h3>
             <h2 className="font-serif text-4xl md:text-5xl text-white mb-6">
               Software house PLC, <br/>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 to-emerald-500">18 programmatori, 200+ clienti attivi</span>
+              <span className="text-emerald-400">18 programmatori, 200+ clienti attivi</span>
             </h2>
           </motion.div>
         </div>
@@ -34,7 +33,7 @@ export const CasoUso: React.FC = () => {
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="bg-platinum-900/30 border border-platinum-800 rounded-lg p-8"
+            className="bg-platinum-900 border border-platinum-800 rounded-lg p-8"
           >
             <div className="flex items-center gap-3 mb-6">
               <div className="p-2 rounded-lg bg-red-500/20 text-red-400">
@@ -64,7 +63,7 @@ export const CasoUso: React.FC = () => {
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="bg-gradient-to-br from-emerald-900/20 to-platinum-900/30 border border-emerald-700/30 rounded-lg p-8"
+            className="bg-platinum-900 border border-emerald-800/50 rounded-lg p-8"
           >
             <div className="flex items-center gap-3 mb-6">
               <div className="p-2 rounded-lg bg-emerald-500/20 text-emerald-400">
@@ -97,7 +96,7 @@ export const CasoUso: React.FC = () => {
           viewport={{ once: true }}
           className="mt-16 max-w-4xl mx-auto"
         >
-          <div className="bg-platinum-900/40 border border-platinum-800 rounded-lg p-8">
+          <div className="bg-platinum-900 border border-platinum-800 rounded-lg p-8">
             <h3 className="text-center text-platinum-500 uppercase tracking-widest text-xs mb-8">Risultati documentati</h3>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
               <div>
