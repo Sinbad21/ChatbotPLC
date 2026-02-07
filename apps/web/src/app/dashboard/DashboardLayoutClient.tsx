@@ -8,10 +8,6 @@ import {
  LayoutGrid,
  Bot,
  MessageSquare,
- BarChart3,
- Users,
- Calendar,
- CalendarCheck,
  Globe,
  Puzzle,
  Settings,
@@ -21,9 +17,10 @@ import {
  Languages,
  Star,
  ChevronDown,
- Zap,
- Megaphone,
  CreditCard,
+ FileText,
+ Upload,
+ Webhook,
 } from 'lucide-react';
 import { useTranslation, LANGUAGES, type Language } from '@/lib/i18n';
 import { useSessionActivity } from '@/hooks/useSessionActivity';
@@ -66,28 +63,26 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
    ]
   },
   {
-   label: 'Marketing',
-   icon: Megaphone,
+   label: 'Documentazione',
+   icon: FileText,
    defaultOpen: true,
    items: [
-    { nameKey: 'nav.analytics', href: '/dashboard/analytics', icon: BarChart3 },
-    { nameKey: 'nav.leads', href: '/dashboard/leads', icon: Users },
+    { nameKey: 'nav.scraping', href: '/dashboard/scraping', icon: Upload },
    ]
   },
   {
-   label: 'Scheduling',
-   icon: Calendar,
+   label: 'Integrazioni',
+   icon: Puzzle,
    items: [
-    { nameKey: 'nav.calendar', href: '/dashboard/calendar', icon: Calendar },
-    { nameKey: 'nav.bookings', href: '/dashboard/bookings', icon: CalendarCheck },
-   ]
-  },
-  {
-   label: 'Tools',
-   icon: Zap,
-   items: [
-    { nameKey: 'nav.scraping', href: '/dashboard/scraping', icon: Globe },
     { nameKey: 'nav.integrations', href: '/dashboard/integrations', icon: Puzzle },
+   ]
+  },
+  {
+   label: 'Amministrazione',
+   icon: Settings,
+   items: [
+    { nameKey: 'nav.billing', href: '/dashboard/billing', icon: CreditCard },
+    { nameKey: 'nav.settings', href: '/dashboard/settings', icon: Settings },
    ]
   },
  ];
@@ -224,34 +219,6 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
      </div>
     );
    })}
-
-   {/* Billing & Settings - always visible at bottom */}
-   <div className="pt-4 mt-4 border-t border-silver-200">
-    <Link
-     href="/dashboard/billing"
-     onClick={isMobile ? () => setSidebarOpen(false) : undefined}
-     className={`flex items-center gap-3 px-3 py-2 rounded-lg text-xs font-medium transition-all duration-200 ${
-      pathname === '/dashboard/billing'
-       ? 'bg-pearl-100 border-l-2 border-emerald text-charcoal'
-       : 'text-silver-700 hover:text-charcoal hover:bg-pearl-100/60'
-     }`}
-    >
-     <CreditCard size={16} />
-     <span>{t('nav.billing')}</span>
-    </Link>
-    <Link
-     href="/dashboard/settings"
-     onClick={isMobile ? () => setSidebarOpen(false) : undefined}
-     className={`flex items-center gap-3 px-3 py-2 rounded-lg text-xs font-medium transition-all duration-200 ${
-      pathname === '/dashboard/settings'
-       ? 'bg-pearl-100 border-l-2 border-emerald text-charcoal'
-       : 'text-silver-700 hover:text-charcoal hover:bg-pearl-100/60'
-     }`}
-    >
-     <Settings size={16} />
-     <span>{t('nav.settings')}</span>
-    </Link>
-   </div>
   </nav>
  );
 
