@@ -64,7 +64,7 @@ export const Services: React.FC = () => {
                 {service.desc}
               </p>
             </motion.div>
-          ))}}
+          ))}
         </div>
       </div>
     </section>
