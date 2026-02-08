@@ -178,7 +178,13 @@ const ChatSlide: React.FC = () => {
         }),
       });
 
-      const data = await response.json();
+      const text = await response.text();
+      let data: any;
+      try {
+        data = JSON.parse(text);
+      } catch {
+        throw new Error('Invalid response');
+      }
 
       setIsTyping(false);
       setDisplayedMessages(prev => [...prev, {
