@@ -12,7 +12,7 @@
 const BACKEND =
   process.env.API_BACKEND_URL ||
   process.env.NEXT_PUBLIC_API_URL ||
-  'https://plcassistant-api.gabrypiritore.workers.dev';
+  'https://plcassistantbackend.gabrypiritore.workers.dev';
 
 /** Headers that must NOT be forwarded to/from the upstream. */
 const HOP_BY_HOP = new Set([
