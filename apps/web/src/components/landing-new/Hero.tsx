@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import {
   ArrowDown, Briefcase, Home, Headphones, RefreshCw,
   ChevronRight, ChevronLeft, BarChart3, Calendar, Users, Download, Filter,
-  CheckCircle, Clock, PieChart
+  CheckCircle, Clock, PieChart, Sparkles
 } from 'lucide-react';
 
 const SCENARIOS = [
