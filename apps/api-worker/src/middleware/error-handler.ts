@@ -33,7 +33,6 @@ function getAllowedOrigins(c: Context): string[] {
     'http://localhost:3000',
     'http://localhost:5173',
     'https://plcassistant.gabrypiritore.workers.dev',
-    'https://plcassistant-web.gabrypiritore.workers.dev',
     'https://omnical.studio',
     'https://www.omnical.studio',
     'https://chatbot-5o5.pages.dev',

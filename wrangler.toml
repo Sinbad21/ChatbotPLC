@@ -7,7 +7,7 @@ compatibility_date = "2025-05-05"
 compatibility_flags = ["nodejs_compat"]
 
 [vars]
-NEXT_PUBLIC_API_URL = "https://plcassistant.gabrypiritore.workers.dev"
+NEXT_PUBLIC_API_URL = "https://plcassistant-api.gabrypiritore.workers.dev"
 
 [assets]
 directory = "apps/web/.open-next/assets"

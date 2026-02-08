@@ -1,4 +1,4 @@
-﻿name = "plcassistant"
+﻿name = "plcassistant-api"
 main = "src/index.ts"
 compatibility_date = "2024-09-23"
 compatibility_flags = ["nodejs_compat"]
@@ -6,6 +6,7 @@ compatibility_flags = ["nodejs_compat"]
 # Environment variables (secrets configured in Cloudflare dashboard)
 [vars]
 APP_URL = "https://plcassistant.gabrypiritore.workers.dev"
+FRONTEND_URL = "https://plcassistant.gabrypiritore.workers.dev"
 
 # Secrets must be set in Cloudflare dashboard under Settings → Variables and Secrets
 # Required:

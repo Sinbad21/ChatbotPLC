@@ -6,7 +6,7 @@ const nextConfig = {
     unoptimized: true,
   },
   env: {
-    NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL || process.env.API_URL || 'https://plcassistant.gabrypiritore.workers.dev',
+    NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL || process.env.API_URL || 'https://plcassistant-api.gabrypiritore.workers.dev',
   },
   // Disable webpack cache to prevent large cache files in Cloudflare deployment
   webpack: (config, { isServer }) => {
