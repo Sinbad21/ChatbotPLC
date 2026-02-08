@@ -4,8 +4,34 @@ import type { NextRequest } from 'next/server';
 // Session timeout: 30 minuti in millisecondi
 const SESSION_TIMEOUT_MS = 30 * 60 * 1000; // 30 minutes
 
+/**
+ * Backend API worker URL.
+ * All /api/* requests are rewritten to this backend, making the site
+ * appear fully full-stack on a single domain.
+ */
+const API_BACKEND_URL =
+  process.env.API_BACKEND_URL ||
+  'https://plcassistantbackend.gabrypiritore.workers.dev';
+
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
+
+  // ─── API Proxy ─────────────────────────────────────────────
+  // Rewrite /api/* requests to the backend worker.
+  // NextResponse.rewrite() acts as a transparent server-side proxy:
+  // the browser never sees the backend URL and cookies are preserved.
+  if (pathname.startsWith('/api/') || pathname === '/api') {
+    const backendUrl = new URL(
+      pathname + (request.nextUrl.search || ''),
+      API_BACKEND_URL
+    );
+    return NextResponse.rewrite(backendUrl);
+  }
+
+  // Also proxy the /health endpoint (used for health checks)
+  if (pathname === '/health') {
+    return NextResponse.rewrite(new URL('/health', API_BACKEND_URL));
+  }
 
   // Only protect dashboard routes (excluding API calls and static files)
   if (pathname.startsWith('/dashboard')) {

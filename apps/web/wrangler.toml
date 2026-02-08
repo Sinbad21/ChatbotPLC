@@ -2,7 +2,7 @@
 name = "plcassistant"
 main = ".open-next/worker.js"
 compatibility_date = "2025-05-05"
-compatibility_flags = ["nodejs_compat"]
+compatibility_flags = ["nodejs_compat", "global_fetch_strictly_public"]
 
 # Workers Paid plan: 10 MiB limit (compressed)
 # Static assets served from assets directory
