@@ -32,9 +32,10 @@ function getAllowedOrigins(c: Context): string[] {
   const hardcoded = [
     'http://localhost:3000',
     'http://localhost:5173',
+    'https://plcassistant.gabrypiritore.workers.dev',
+    'https://plcassistant-web.gabrypiritore.workers.dev',
     'https://omnical.studio',
     'https://www.omnical.studio',
-    'https://plcassistant-web.gabrypiritore.workers.dev',
     'https://chatbot-5o5.pages.dev',
     'https://chatbot-studio.pages.dev',
     'https://chatbot-studio-29k.pages.dev',

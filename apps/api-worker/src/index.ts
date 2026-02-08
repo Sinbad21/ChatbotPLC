@@ -45,7 +45,8 @@ const app = new Hono<{ Bindings: Bindings }>();
 
 // CORS middleware - robust setup with error handler
 const ALLOWED_ORIGINS = [
-  'https://plcassistant-web.gabrypiritore.workers.dev', // Frontend Worker (OpenNext)
+  'https://plcassistant.gabrypiritore.workers.dev',     // Production (front + back same domain)
+  'https://plcassistant-web.gabrypiritore.workers.dev', // Legacy frontend Worker
   'https://chatbot-5o5.pages.dev',
   'https://chatbot-studio.pages.dev',
   'https://chatbot-studio-29k.pages.dev',
