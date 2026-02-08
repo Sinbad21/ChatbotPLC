@@ -83,7 +83,13 @@ export default function RegisterPage() {
         }),
       });
 
-      const data = await response.json();
+      const text = await response.text();
+      let data: any;
+      try {
+        data = JSON.parse(text);
+      } catch {
+        throw new Error('Server returned an invalid response. Please try again later.');
+      }
 
       if (!response.ok) {
         throw new Error(data.error || 'Registration failed');
