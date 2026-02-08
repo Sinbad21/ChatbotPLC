@@ -35,11 +35,10 @@ export async function ensureClientUser(): Promise<ClientUser | null> {
     return existing;
   }
 
-  const apiUrl = process.env.NEXT_PUBLIC_WORKER_API_URL || process.env.NEXT_PUBLIC_API_URL;
-  if (!apiUrl) return null;
+  const apiUrl = (process.env.NEXT_PUBLIC_WORKER_API_URL || process.env.NEXT_PUBLIC_API_URL || '').replace(/\/$/, '');
 
   try {
-    const response = await fetch(`${apiUrl.replace(/\/$/, '')}/api/v1/auth/me`, {
+    const response = await fetch(`${apiUrl}/api/v1/auth/me`, {
       method: 'GET',
       credentials: 'include',
       headers: { 'Content-Type': 'application/json' },

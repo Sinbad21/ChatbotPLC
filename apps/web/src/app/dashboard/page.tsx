@@ -65,10 +65,8 @@ export default function DashboardPage() {
  useEffect(() => {
   const fetchDashboardData = async () => {
    try {
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
-
     // Fetch analytics overview (auth via httpOnly cookies)
-    const analyticsResponse = await fetch(`${apiUrl}/api/v1/analytics/overview`, {
+    const analyticsResponse = await fetch('/api/v1/analytics/overview', {
      credentials: 'include',
      headers: { 'Content-Type': 'application/json' },
     });
@@ -83,7 +81,7 @@ export default function DashboardPage() {
     setAnalytics(analyticsData);
 
     // Fetch recent bots
-    const botsResponse = await fetch(`${apiUrl}/api/v1/analytics/recent-bots?limit=3`, {
+    const botsResponse = await fetch('/api/v1/analytics/recent-bots?limit=3', {
      credentials: 'include',
      headers: { 'Content-Type': 'application/json' },
     });
@@ -94,7 +92,7 @@ export default function DashboardPage() {
     setRecentBots(botsData);
 
     // Fetch all bots to check for documents (for onboarding)
-    const allBotsResponse = await fetch(`${apiUrl}/api/v1/bots`, {
+    const allBotsResponse = await fetch('/api/v1/bots', {
      credentials: 'include',
      headers: { 'Content-Type': 'application/json' },
     });

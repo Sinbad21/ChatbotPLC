@@ -402,13 +402,7 @@ export default function NewBotPage() {
     setLoading(true);
 
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-
-      if (!apiUrl) {
-        throw new Error(t('createBot.configError'));
-      }
-
-      const response = await fetch(`${apiUrl}/api/v1/bots`, {
+      const response = await fetch('/api/v1/bots', {
         method: 'POST',
         credentials: 'include',
         headers: {

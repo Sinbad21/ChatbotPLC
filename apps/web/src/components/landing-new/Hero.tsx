@@ -93,7 +93,6 @@ const ChatSlide: React.FC = () => {
   const messagesRef = useRef<Message[]>([]); // Track messages for API calls
   const currentScenario = SCENARIOS[0];
 
-  const API_URL = process.env.NEXT_PUBLIC_API_URL || '';
   const lastCallRef = useRef<number>(0);
   const DEMO_RATE_LIMIT_MS = 3000; // Min 3s between demo API calls
 
@@ -168,7 +167,7 @@ const ChatSlide: React.FC = () => {
     setIsTyping(true);
 
     try {
-      const response = await fetch(`${API_URL}/api/v1/chat/demo`, {
+      const response = await fetch('/api/v1/chat/demo', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

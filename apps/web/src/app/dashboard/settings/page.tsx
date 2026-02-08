@@ -122,7 +122,7 @@ export default function SettingsPage() {
 
   const loadApiKeys = async () => {
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_WORKER_API_URL || process.env.NEXT_PUBLIC_API_URL;
+      const apiUrl = process.env.NEXT_PUBLIC_WORKER_API_URL || '';
       const response = await axios.get(`${apiUrl}/api/v1/api-keys`, {
         withCredentials: true,
       });
@@ -186,7 +186,7 @@ export default function SettingsPage() {
     setMessage(null);
 
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_WORKER_API_URL || process.env.NEXT_PUBLIC_API_URL;
+      const apiUrl = process.env.NEXT_PUBLIC_WORKER_API_URL || '';
       const response = await axios.post(
         `${apiUrl}/api/v1/api-keys`,
         { name: newKeyName.trim() },
@@ -217,7 +217,7 @@ export default function SettingsPage() {
     }
 
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_WORKER_API_URL || process.env.NEXT_PUBLIC_API_URL;
+      const apiUrl = process.env.NEXT_PUBLIC_WORKER_API_URL || '';
       await axios.delete(`${apiUrl}/api/v1/api-keys/${id}`, {
         withCredentials: true,
       });

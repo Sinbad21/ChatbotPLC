@@ -90,12 +90,7 @@ export function useEntitlements(): UseEntitlementsResult {
       setLoading(true);
       setError(null);
 
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-      if (!apiUrl) {
-        throw new Error('API URL not configured');
-      }
-
-      const res = await fetch(`${apiUrl}/api/v1/entitlements`, {
+      const res = await fetch('/api/v1/entitlements', {
         credentials: 'include',
         headers: buildAuthHeaders(),
       });

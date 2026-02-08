@@ -9,7 +9,7 @@ compatibility_flags = ["nodejs_compat"]
 
 # Environment variables
 [vars]
-NEXT_PUBLIC_API_URL = "https://plcassistant-api.gabrypiritore.workers.dev"
+API_BACKEND_URL = "https://plcassistant-api.gabrypiritore.workers.dev"
 
 [assets]
 directory = ".open-next/assets"

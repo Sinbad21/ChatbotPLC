@@ -76,7 +76,7 @@ export default function ConversationsClient() {
       setLoading(true);
       setError(null);
 
-      const apiUrl = process.env.NEXT_PUBLIC_WORKER_API_URL || process.env.NEXT_PUBLIC_API_URL;
+      const apiUrl = process.env.NEXT_PUBLIC_WORKER_API_URL || '';
 
       // Load conversations from API
       const response = await axios.get<ConversationListItem[]>(
@@ -102,7 +102,7 @@ export default function ConversationsClient() {
       setLoading(true);
       setError(null);
 
-      const apiUrl = process.env.NEXT_PUBLIC_WORKER_API_URL || process.env.NEXT_PUBLIC_API_URL;
+      const apiUrl = process.env.NEXT_PUBLIC_WORKER_API_URL || '';
 
       // Load conversation detail from API
       const response = await axios.get<ConversationDetail>(
@@ -167,7 +167,7 @@ ${transcript}
     }
 
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_WORKER_API_URL || process.env.NEXT_PUBLIC_API_URL;
+      const apiUrl = process.env.NEXT_PUBLIC_WORKER_API_URL || '';
 
       await axios.delete(`${apiUrl}/api/v1/conversations/${conversationId}`, {
         withCredentials: true,
@@ -193,7 +193,7 @@ ${transcript}
 
     setIsSavingTraining(true);
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_WORKER_API_URL || process.env.NEXT_PUBLIC_API_URL;
+      const apiUrl = process.env.NEXT_PUBLIC_WORKER_API_URL || '';
 
       if (trainingType === 'faq') {
         await axios.post(

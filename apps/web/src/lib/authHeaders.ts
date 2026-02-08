@@ -15,6 +15,8 @@ export function buildAuthHeaders(includeContentType: boolean = true): Record<str
 }
 
 function getApiBaseUrl(): string {
+  // With the API proxy route, all /api/* requests are same-origin.
+  // No external URL needed — relative paths just work.
   return (process.env.NEXT_PUBLIC_WORKER_API_URL || process.env.NEXT_PUBLIC_API_URL || '').replace(/\/$/, '');
 }
 
@@ -24,11 +26,6 @@ function getApiBaseUrl(): string {
  */
 export async function authFetch(url: string, options: RequestInit = {}): Promise<Response> {
   const apiBaseUrl = getApiBaseUrl();
-  // If the base URL is missing, a relative '/api/...' request would hit the frontend worker,
-  // which looks like Failed to load organizations and breaks auth.
-  if (!apiBaseUrl && url.startsWith('/api/')) {
-    throw new Error('API base URL is missing (set NEXT_PUBLIC_API_URL or NEXT_PUBLIC_WORKER_API_URL)');
-  }
   const fullUrl = url.startsWith('http') ? url : apiBaseUrl ? `${apiBaseUrl}${url}` : url;
 
   return fetch(fullUrl, {
@@ -46,15 +43,11 @@ export async function authFetch(url: string, options: RequestInit = {}): Promise
  * and clears local storage user data.
  */
 export async function logout(): Promise<void> {
-  const apiBaseUrl = getApiBaseUrl();
-
   try {
-    if (apiBaseUrl) {
-      await fetch(`${apiBaseUrl}/api/v1/auth/logout`, {
-        method: 'POST',
-        credentials: 'include',
-      });
-    }
+    await fetch('/api/v1/auth/logout', {
+      method: 'POST',
+      credentials: 'include',
+    });
   } catch (error) {
     console.error('Logout API call failed:', error);
   }

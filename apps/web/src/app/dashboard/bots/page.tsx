@@ -28,15 +28,7 @@ export default function BotsListPage() {
 
  const fetchBots = async () => {
   try {
-   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-
-   if (!apiUrl) {
-    setError(t('bots.configError'));
-    setLoading(false);
-    return;
-   }
-
-   const response = await fetch(`${apiUrl}/api/v1/bots`, {
+   const response = await fetch('/api/v1/bots', {
     credentials: 'include',
    });
 
