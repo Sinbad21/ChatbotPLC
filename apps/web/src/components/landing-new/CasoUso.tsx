@@ -17,13 +17,16 @@ export const CasoUso: React.FC = () => {
           >
             <h3 className="text-platinum-500 uppercase tracking-[0.2em] text-xs font-bold mb-4 flex items-center justify-center gap-2">
               <span className="w-8 h-[1px] bg-platinum-500"></span>
-              Caso Reale
+              Scenario Tipo
               <span className="w-8 h-[1px] bg-platinum-500"></span>
             </h3>
             <h2 className="font-serif text-4xl md:text-5xl text-white mb-6">
               Software house PLC, <br/>
-              <span className="text-emerald-400">18 programmatori, 200+ clienti attivi</span>
+              <span className="text-emerald-400">15–20 sviluppatori, 150+ clienti attivi</span>
             </h2>
+            <p className="text-platinum-600 text-xs max-w-xl mx-auto">
+              Scenario anonimizzato basato su benchmark interni. I risultati possono variare in base al contesto operativo.
+            </p>
           </motion.div>
         </div>
 
@@ -97,26 +100,26 @@ export const CasoUso: React.FC = () => {
           className="mt-16 max-w-4xl mx-auto"
         >
           <div className="bg-platinum-900 border border-platinum-800 rounded-lg p-8">
-            <h3 className="text-center text-platinum-500 uppercase tracking-widest text-xs mb-8">Risultati documentati</h3>
+            <h3 className="text-center text-platinum-500 uppercase tracking-widest text-xs mb-8">Risultati tipici osservati</h3>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
               <div>
                 <div className="flex items-center justify-center gap-2 mb-2">
                   <TrendingDown className="w-5 h-5 text-emerald-400" />
-                  <span className="text-3xl font-bold text-white">-72%</span>
+                  <span className="text-3xl font-bold text-white">fino a -70%</span>
                 </div>
                 <div className="text-platinum-500 text-sm">Ticket al supporto</div>
               </div>
               <div>
                 <div className="flex items-center justify-center gap-2 mb-2">
                   <Clock className="w-5 h-5 text-emerald-400" />
-                  <span className="text-3xl font-bold text-white">38h</span>
+                  <span className="text-3xl font-bold text-white">~35h</span>
                 </div>
-                <div className="text-platinum-500 text-sm">Risparmiate / settimana</div>
+                <div className="text-platinum-500 text-sm">Risparmiate / settimana*</div>
               </div>
               <div>
                 <div className="flex items-center justify-center gap-2 mb-2">
                   <Users className="w-5 h-5 text-emerald-400" />
-                  <span className="text-3xl font-bold text-white">-75%</span>
+                  <span className="text-3xl font-bold text-white">fino a -75%</span>
                 </div>
                 <div className="text-platinum-500 text-sm">Tempo onboarding dev</div>
               </div>
@@ -125,9 +128,10 @@ export const CasoUso: React.FC = () => {
                   <Factory className="w-5 h-5 text-emerald-400" />
                   <span className="text-3xl font-bold text-white">3 mesi</span>
                 </div>
-                <div className="text-platinum-500 text-sm">Payback raggiunto</div>
+                <div className="text-platinum-500 text-sm">Payback tipico</div>
               </div>
             </div>
+            <p className="text-platinum-600 text-xs mt-6 text-center">* Valori indicativi basati su scenari comparabili. I risultati effettivi dipendono dal volume documentale e dall&apos;organizzazione.</p>
           </div>
         </motion.div>
 

@@ -57,7 +57,7 @@ const updateEventSchema = z.object({
 const getCalendarService = (c: any): GoogleCalendarService => {
   const clientId = c.env.GOOGLE_CLIENT_ID;
   const clientSecret = c.env.GOOGLE_CLIENT_SECRET;
-  const redirectUri = 'https://chatbotstudio.gabrypiritore.workers.dev/calendar/callback/google';
+  const redirectUri = 'https://plcassistant.gabrypiritore.workers.dev/calendar/callback/google';
 
   if (!clientId || !clientSecret) {
     throw new Error('Google Calendar credentials not configured');

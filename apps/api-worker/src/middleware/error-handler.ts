@@ -29,13 +29,24 @@ interface ErrorResponse {
  * Get allowed origins for CORS
  */
 function getAllowedOrigins(c: Context): string[] {
-  return [
+  const hardcoded = [
     'http://localhost:3000',
     'http://localhost:5173',
     'https://omnical.studio',
     'https://www.omnical.studio',
-    'https://chatbotstudio.gabrypiritore.workers.dev',
+    'https://plcassistant-web.gabrypiritore.workers.dev',
+    'https://chatbot-5o5.pages.dev',
+    'https://chatbot-studio.pages.dev',
+    'https://chatbot-studio-29k.pages.dev',
   ];
+
+  // Also read env vars like the main CORS middleware
+  const env = (c as any).env || {};
+  const fromEnvRaw = (env.FRONTEND_URLS || env.FRONTEND_URL || '') as string;
+  const fromEnv = fromEnvRaw.split(',').map((o: string) => o.trim()).filter(Boolean);
+  const fromAppUrl = env.APP_URL ? [String(env.APP_URL).trim()].filter(Boolean) : [];
+
+  return Array.from(new Set([...hardcoded, ...fromEnv, ...fromAppUrl]));
 }
 
 /**

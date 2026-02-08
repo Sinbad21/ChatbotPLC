@@ -7,7 +7,7 @@ import { Home, TrendingUp, Headphones } from 'lucide-react';
 const personas = [
   {
     role: "Service Manager",
-    prompt: "Riduce i ticket di primo livello del 70%. I clienti trovano le risposte sui manuali senza aprire richieste.",
+    prompt: "Riduce i ticket di primo livello fino al 70%. I clienti trovano le risposte sui manuali senza aprire richieste.",
     icon: <Headphones />,
     image: {
       src: "/landing-new/personas/customer-success.png",
@@ -17,7 +17,7 @@ const personas = [
   },
   {
     role: "Responsabile Ufficio Tecnico",
-    prompt: "I tecnici sul campo consultano il sistema invece di chiamare. Le interruzioni calano dell'80%.",
+    prompt: "I tecnici sul campo consultano il sistema invece di chiamare. Le interruzioni possono calare fino all'80%.",
     icon: <Home />,
     image: {
       src: "/landing-new/personas/real-estate.png",

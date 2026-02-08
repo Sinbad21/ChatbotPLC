@@ -52,14 +52,14 @@ export const About: React.FC = () => {
               Manuali, schede tecniche, procedure. Tutto archiviato, niente consultato. Il supporto risponde alle stesse domande. I tecnici chiamano invece di cercare.
             </p>
             <p className="text-platinum-400 mb-8 leading-relaxed">
-              Ogni interruzione costa 45 minuti. Ogni ticket ripetuto costa €15-30. Ogni nuovo assunto impiega settimane a orientarsi. È un costo invisibile, ma reale.
+              Ogni interruzione costa in media 45 minuti. Un ticket ripetuto può costare €15-30. Un nuovo assunto impiega settimane a orientarsi. È un costo invisibile, ma reale.
             </p>
 
             <div className="flex flex-col gap-4">
               {[
-                { icon: <Network size={20} />, text: "70% dei ticket risolvibili da documentazione" },
-                { icon: <Cpu size={20} />, text: "15+ interruzioni al giorno per l'ufficio tecnico" },
-                { icon: <Lock size={20} />, text: "3 settimane per rendere operativo un nuovo assunto" }
+                { icon: <Network size={20} />, text: "Fino al 70% dei ticket risolvibili da documentazione" },
+                { icon: <Cpu size={20} />, text: "Fino a 15+ interruzioni al giorno per l'ufficio tecnico" },
+                { icon: <Lock size={20} />, text: "In media 3 settimane per rendere operativo un nuovo assunto" }
               ].map((item, idx) => (
                 <div key={idx} className="flex items-center gap-4 p-3 border-b border-platinum-900 hover:border-platinum-700 transition-colors group cursor-default">
                   <span className="text-platinum-600 group-hover:text-platinum-200 transition-colors">{item.icon}</span>

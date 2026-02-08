@@ -1,5 +1,5 @@
 # Cloudflare Workers configuration for OpenNext
-name = "chatbotstudio-web"
+name = "plcassistant-web"
 main = ".open-next/worker.js"
 compatibility_date = "2025-05-05"
 compatibility_flags = ["nodejs_compat"]
@@ -9,7 +9,7 @@ compatibility_flags = ["nodejs_compat"]
 
 # Environment variables
 [vars]
-NEXT_PUBLIC_API_URL = "https://chatbotstudio.gabrypiritore.workers.dev"
+NEXT_PUBLIC_API_URL = "https://plcassistant.gabrypiritore.workers.dev"
 
 [assets]
 directory = ".open-next/assets"

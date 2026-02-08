@@ -24,9 +24,9 @@ const plans: Plan[] = [
     name: 'Team Tecnico',
     idealFor: 'Ufficio tecnico, reparto manutenzione',
     documentVolume: 'Fino a 500 pagine',
-    ticketReduction: '-40% interruzioni',
-    paybackTime: '4-6 mesi',
-    annualSavings: '€8.000+',
+    ticketReduction: 'fino a -40% interruzioni',
+    paybackTime: '4-6 mesi stimati',
+    annualSavings: 'fino a €8.000',
     icon: <FileText className="w-6 h-6" />,
     features: [
       'Manuali macchine e impianti',
@@ -41,9 +41,9 @@ const plans: Plan[] = [
     name: 'Reparto / Business Unit',
     idealFor: 'Supporto clienti, service post-vendita',
     documentVolume: 'Fino a 2.000 pagine',
-    ticketReduction: '-60% ticket L1',
-    paybackTime: '3-4 mesi',
-    annualSavings: '€18.000+',
+    ticketReduction: 'fino a -60% ticket L1',
+    paybackTime: '3-4 mesi stimati',
+    annualSavings: 'fino a €18.000',
     icon: <Users className="w-6 h-6" />,
     features: [
       'Tutto Team Tecnico +',
@@ -60,9 +60,9 @@ const plans: Plan[] = [
     name: 'Azienda',
     idealFor: 'Intera organizzazione, multi-reparto',
     documentVolume: 'Fino a 10.000 pagine',
-    ticketReduction: '-70% ticket totali',
-    paybackTime: '2-3 mesi',
-    annualSavings: '€40.000+',
+    ticketReduction: 'fino a -70% ticket totali',
+    paybackTime: '2-3 mesi stimati',
+    annualSavings: 'fino a €40.000',
     icon: <Building2 className="w-6 h-6" />,
     features: [
       'Tutto Reparto +',
@@ -80,7 +80,7 @@ const plans: Plan[] = [
     idealFor: 'Multi-sito, multi-paese, OEM',
     documentVolume: 'Illimitato',
     ticketReduction: 'Progetto su misura',
-    paybackTime: 'ROI documentato',
+    paybackTime: 'ROI calcolato su misura',
     annualSavings: 'Calcolato insieme',
     icon: <Factory className="w-6 h-6" />,
     features: [
@@ -220,6 +220,9 @@ export const PricingV2: React.FC = () => {
           </p>
           <p className="text-platinum-600 text-xs">
             Prezzi definiti dopo assessment. Nessun vincolo annuale obbligatorio.
+          </p>
+          <p className="text-platinum-700 text-[10px] mt-2">
+            I valori di risparmio e riduzione ticket sono stime basate su benchmark interni e possono variare.
           </p>
         </div>
       </div>

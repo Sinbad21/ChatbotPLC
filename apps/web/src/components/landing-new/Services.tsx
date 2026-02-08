@@ -7,12 +7,12 @@ import { MessageSquareCode, BrainCircuit, Zap, Globe2 } from 'lucide-react';
 const services = [
   {
     icon: <MessageSquareCode className="w-8 h-8" />,
-    title: "Riduzione ticket L1: -70%",
+    title: "Riduzione ticket L1: fino a -70%",
     desc: "Le domande ripetitive vengono risolte automaticamente. Il supporto si occupa solo dei casi che richiedono competenza."
   },
   {
     icon: <BrainCircuit className="w-8 h-8" />,
-    title: "Interruzioni: -80%",
+    title: "Interruzioni: fino a -80%",
     desc: "I tecnici consultano il sistema invece di chiamare l'ufficio. Chi lavora, lavora senza fermarsi."
   },
   {
@@ -42,7 +42,7 @@ export const Services: React.FC = () => {
           <h2 className="font-serif text-4xl md:text-5xl text-white mb-4">Cosa cambia in azienda</h2>
           <div className="w-24 h-[1px] bg-platinum-700 mx-auto mb-6" />
           <p className="mt-6 text-platinum-400 max-w-2xl mx-auto">
-            Numeri reali, non promesse. Ogni risultato è misurabile e verificabile.
+            Valori tipici osservati nei nostri progetti. I risultati variano in base al contesto operativo.
           </p>
         </motion.div>
 

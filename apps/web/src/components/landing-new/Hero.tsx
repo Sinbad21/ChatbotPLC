@@ -11,42 +11,42 @@ import {
 
 const SCENARIOS = [
   {
-    id: 'sales',
-    persona: "Sales Specialist",
+    id: 'support',
+    persona: "Supporto Tecnico",
     color: "text-blue-400",
     bgGradient: "from-blue-500/20 to-transparent",
-    icon: <Briefcase className="w-5 h-5" />,
-    messages: [
-      { text: "Vorrei aumentare i lead per la mia agenzia immobiliare.", sender: 'user' as const },
-      { text: "Analisi completata. Per il settore Real Estate, consiglio un bot proattivo che pre-qualifica i clienti chiedendo budget e zona preferita.", sender: 'bot' as const },
-      { text: "Sembra utile. PuÃ² fissare appuntamenti?", sender: 'user' as const },
-      { text: "Certamente. Si integra con Google Calendar e prenota visite solo per lead qualificati sopra i 300kâ‚¬.", sender: 'bot' as const }
-    ]
-  },
-  {
-    id: 'realestate',
-    persona: "Luxury Estate Agent",
-    color: "text-emerald-400",
-    bgGradient: "from-emerald-500/20 to-transparent",
-    icon: <Home className="w-5 h-5" />,
-    messages: [
-      { text: "Cerco un attico in centro a Milano con terrazza.", sender: 'user' as const },
-      { text: "Ho trovato 3 opzioni off-market in zona Brera. L'opzione A ha una terrazza di 40mq e vista Duomo. Desideri le planimetrie?", sender: 'bot' as const },
-      { text: "SÃ¬, inviamele su WhatsApp.", sender: 'user' as const },
-      { text: "Inviate ora. Ho incluso anche un video tour virtuale dell'interno. Vuoi che ti chiami un consulente?", sender: 'bot' as const }
-    ]
-  },
-  {
-    id: 'support',
-    persona: "Tech Support AI",
-    color: "text-purple-400",
-    bgGradient: "from-purple-500/20 to-transparent",
     icon: <Headphones className="w-5 h-5" />,
     messages: [
-      { text: "Il mio ordine #4092 Ã¨ in ritardo.", sender: 'user' as const },
-      { text: "Controllo subito, Marco... Vedo che il pacco Ã¨ in transito a Bologna. La nuova consegna stimata Ã¨ domani entro le 14:00.", sender: 'bot' as const },
-      { text: "Perfetto, grazie mille.", sender: 'user' as const },
-      { text: "Di nulla! Ti ho appena inviato il link di tracking aggiornato via SMS. Serve altro?", sender: 'bot' as const }
+      { text: "Il drive STO sul quadro linea 3 segnala errore F004. Come resetto?", sender: 'user' as const },
+      { text: "L'errore F004 indica sovracorrente. Ecco la procedura: 1) Togli tensione al drive. 2) Attendi 30s. 3) Controlla i parametri P1082 e P1120 nel manuale §4.3.2. Serve il link al documento?", sender: 'bot' as const },
+      { text: "Si, mandami il link. E se si ripresenta?", sender: 'user' as const },
+      { text: "Ecco il manuale: [STO_Drive_v2.4.pdf §4.3.2]. Se si ripresenta, verificare il cablaggio encoder e il parametro P0610. In caso contrario, escalation al tecnico di zona.", sender: 'bot' as const }
+    ]
+  },
+  {
+    id: 'onboarding',
+    persona: "Onboarding Tecnico",
+    color: "text-emerald-400",
+    bgGradient: "from-emerald-500/20 to-transparent",
+    icon: <Briefcase className="w-5 h-5" />,
+    messages: [
+      { text: "Sono nuovo nel team. Come configuro l'ambiente di sviluppo per i progetti PLC?", sender: 'user' as const },
+      { text: "Benvenuto! Segui questa checklist: 1) Installa TIA Portal v18 (vedi guida IT-SETUP-001). 2) Clona il repo template da GitLab. 3) Configura la VPN seguendo la procedura §2.1 del manuale IT.", sender: 'bot' as const },
+      { text: "Dove trovo le credenziali per il server di test?", sender: 'user' as const },
+      { text: "Le credenziali temporanee sono nella sezione 'Accessi Test' del wiki interno. Il tuo team lead deve approvarle. Ti invio il link: [WIKI/Accessi-Test].", sender: 'bot' as const }
+    ]
+  },
+  {
+    id: 'cliente',
+    persona: "Assistenza Clienti",
+    color: "text-purple-400",
+    bgGradient: "from-purple-500/20 to-transparent",
+    icon: <Home className="w-5 h-5" />,
+    messages: [
+      { text: "Ho bisogno della scheda tecnica del modulo I/O ET200SP per il progetto che stiamo facendo.", sender: 'user' as const },
+      { text: "Ecco la scheda tecnica del modulo ET200SP DI 16x24VDC: [DS-ET200SP-DI16.pdf]. Include pinout, specifiche elettriche e limiti operativi. Serve una configurazione specifica?", sender: 'bot' as const },
+      { text: "Si, temperature di esercizio e certificazioni ATEX.", sender: 'user' as const },
+      { text: "Range operativo: -25°C / +60°C (senza declassamento fino a 55°C). Per ambienti ATEX, serve la variante ET200SP HA (High Availability). Ti allego la nota tecnica: [NT-ATEX-ET200.pdf §3.1].", sender: 'bot' as const }
     ]
   }
 ];
@@ -94,6 +94,8 @@ const ChatSlide: React.FC = () => {
   const currentScenario = SCENARIOS[0];
 
   const API_URL = process.env.NEXT_PUBLIC_API_URL || '';
+  const lastCallRef = useRef<number>(0);
+  const DEMO_RATE_LIMIT_MS = 3000; // Min 3s between demo API calls
 
   // Keep messagesRef in sync with displayedMessages
   useEffect(() => {
@@ -137,6 +139,11 @@ const ChatSlide: React.FC = () => {
   const sendMessage = async (messageOverride?: string) => {
     const userMessage = (messageOverride ?? inputValue).trim();
     if (!userMessage || isLoading) return;
+
+    // Client-side rate limiting to prevent abuse
+    const now = Date.now();
+    if (now - lastCallRef.current < DEMO_RATE_LIMIT_MS) return;
+    lastCallRef.current = now;
 
     setInputValue('');
 
@@ -338,7 +345,7 @@ const DashboardSlide: React.FC = () => {
           <div className="text-platinum-400 text-xs uppercase mb-1">Tempo Risposta</div>
           <div className="text-2xl font-bold text-white">0.2s</div>
           <div className="flex items-center gap-1 text-emerald-400 text-[10px] mt-1">
-            <span className="font-bold">âš¡ Instant</span>
+            <span className="font-bold">⚡ Instant</span>
           </div>
         </div>
         <div className="p-4 bg-platinum-950/50 border border-platinum-800 rounded-xl">
@@ -410,7 +417,7 @@ const BookingSlide: React.FC = () => {
               <div>
                 <div className="text-white text-sm font-medium">{apt.name}</div>
                 <div className="text-platinum-500 text-xs flex items-center gap-1">
-                  <Clock size={10} /> {apt.time} â€¢ {apt.type}
+                  <Clock size={10} /> {apt.time} • {apt.type}
                 </div>
               </div>
             </div>
@@ -635,7 +642,7 @@ export const Hero: React.FC = () => {
         <div className="border-t border-platinum-800/50 pt-10">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 max-w-4xl mx-auto">
             <div className="text-center">
-              <div className="text-3xl md:text-4xl font-serif font-bold text-platinum-100 mb-1">-70%</div>
+              <div className="text-3xl md:text-4xl font-serif font-bold text-platinum-100 mb-1">fino a -70%</div>
               <div className="text-xs text-platinum-500 uppercase tracking-wide">Riduzione ticket L1</div>
             </div>
             <div className="text-center">
@@ -648,7 +655,7 @@ export const Hero: React.FC = () => {
             </div>
             <div className="text-center">
               <div className="text-3xl md:text-4xl font-serif font-bold text-platinum-100 mb-1">3–6</div>
-              <div className="text-xs text-platinum-500 uppercase tracking-wide">Mesi payback tipico</div>
+              <div className="text-xs text-platinum-500 uppercase tracking-wide">Mesi payback stimato</div>
             </div>
           </div>
         </div>

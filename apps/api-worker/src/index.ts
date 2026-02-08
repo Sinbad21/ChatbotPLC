@@ -45,7 +45,7 @@ const app = new Hono<{ Bindings: Bindings }>();
 
 // CORS middleware - robust setup with error handler
 const ALLOWED_ORIGINS = [
-  'https://chatbotstudio-web.gabrypiritore.workers.dev', // Frontend Worker (OpenNext)
+  'https://plcassistant-web.gabrypiritore.workers.dev', // Frontend Worker (OpenNext)
   'https://chatbot-5o5.pages.dev',
   'https://chatbot-studio.pages.dev',
   'https://chatbot-studio-29k.pages.dev',
@@ -504,7 +504,7 @@ app.post('/api/v1/auth/forgot-password', async (c) => {
     });
 
     // Build reset URL
-    const frontendUrl = c.env.APP_URL || 'https://chatbotstudio-web.gabrypiritore.workers.dev';
+    const frontendUrl = c.env.APP_URL || 'https://plcassistant-web.gabrypiritore.workers.dev';
     const resetUrl = `${frontendUrl}/auth/reset-password?token=${resetToken}`;
 
     console.log('[FORGOT-PASSWORD] Reset URL generated for:', email);
